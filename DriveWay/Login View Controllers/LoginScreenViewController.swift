@@ -44,7 +44,7 @@ class LoginScreenViewController: UIViewController {
     func setUpObjects() {
         Utilities.styleTextField(emailTextField)
         Utilities.styleTextField(passwordTextField)
-        Utilities.styleButton(loginButton)
+        Utilities.styleButtonNeutral(loginButton)
     }
 
 }

@@ -9,9 +9,13 @@ import UIKit
 
 class InstructorOrLearnerViewController: UIViewController {
 
+    // MARK: - Outlets and Variables
     @IBOutlet weak var instructorButton: UIButton!
     @IBOutlet weak var learnerButton: UIButton!
     
+    var accountType = String()
+    
+    // MARK: - UISetup
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -19,19 +23,25 @@ class InstructorOrLearnerViewController: UIViewController {
     }
     
     func setUpObjects() {
-        Utilities.styleButton(instructorButton)
-        Utilities.styleButton(learnerButton)
+        Utilities.styleButtonNeutral(instructorButton)
+        Utilities.styleButtonNeutral(learnerButton)
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        // Getting the name of the segue
+        let segueName = segue.identifier
+        // As both segues have the same destination this need not be in an if statement
+        let destination = segue.destination as! PersonalDataEntryViewController
 
+        // If the segue is the instructors segue the account type is instructor
+        if segueName == "toPersonalDataInstructor" {
+            destination.accountType = "Instructors"
+        }
+        // If the segue is the learners segue the account type is learner
+        if segueName == "toPersonalDataLearner" {
+            destination.accountType = "Students"
+        }
+    }
 }
