@@ -20,6 +20,13 @@ class Utilities {
         textField.layer.borderWidth = 3
     }
     
+    static func styleTextView(_ textView:UITextView) {
+        textView.layer.cornerRadius = 15
+        textView.layer.masksToBounds = true
+        textView.layer.borderColor = UIColor(named: "black")?.cgColor
+        textView.layer.borderWidth = 3
+    }
+    
     // MARK: - Button Style Functions
     // This function stylizes the buttons to be black and white
     static func styleButtonNeutral(_ button:UIButton) {
@@ -67,5 +74,15 @@ class Utilities {
     static func validateEmail(_ email:String) -> Bool {
         let goodEmail = NSPredicate(format: "SELF MATCHES %@ ", "")
         return goodEmail.evaluate(with: email)
+    }
+    
+    // MARK: - Button Functions
+    // This function toggles a button
+    static func toggleButton(_ button: UIButton) {
+        if button.isSelected == false {
+            button.isSelected = true
+        } else {
+            button.isSelected = false
+        }
     }
 }

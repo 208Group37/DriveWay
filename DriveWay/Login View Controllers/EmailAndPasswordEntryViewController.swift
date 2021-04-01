@@ -19,6 +19,7 @@ class EmailAndPasswordEntryViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     // MARK: - Variables
     // The variables that are passed from the previous segue
@@ -61,6 +62,10 @@ class EmailAndPasswordEntryViewController: UIViewController {
             let email = emailAddressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
+            // Show activity indicator
+            self.loadingIndicator.isHidden = false
+            // Disable the button so it cannot be pressed repeatedly
+            createAccountButton.isEnabled = false
             // Create the user with clean email and password
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                 // If there is an error with the creation tell the user
@@ -91,10 +96,16 @@ class EmailAndPasswordEntryViewController: UIViewController {
                         if error != nil {
                             self.showError("Error saving user data")
                         }
+                                                
                         // Otherwise transition to the next screen
+                        if self.accountType == "Students" {
+                            self.performSegue(withIdentifier: "toLearnerMoreData", sender: nil)
+                        }
+                        if self.accountType == "Instructors" {
+                            self.performSegue(withIdentifier: "toInstructorMoreData", sender: nil)
+                        }
                     }
                 }
-                
             }
         }
     }
@@ -134,14 +145,19 @@ class EmailAndPasswordEntryViewController: UIViewController {
         errorLabel.isHidden = false
     }
     
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        let segueName = segue.identifier
+        if segueName == "toInstructorMoreData" {
+            let destination = segue.destination as! InstructorMoreDataViewController
+            destination.firstName = self.firstName
+        }
+        if segueName == "toLearnerMoreData" {
+            let destination = segue.destination as! LearnerMoreDataViewController
+            destination.firstName = self.firstName
+        }
     }
-    */
-
 }

@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		6FF6B991AD16B85B35737CD8 /* Pods_DriveWay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE636D4B92674473E5D74755 /* Pods_DriveWay.framework */; };
+		F81EBF0A26138030003F42DF /* LearnerMoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */; };
+		F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */; };
 		F852399D261201F200B3959D /* PersonalDataEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */; };
+		F874A613261652600070610E /* AboutMeEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874A612261652600070610E /* AboutMeEntryViewController.swift */; };
 		F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */; };
 		F88605AA26113380007E9F99 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88605A926113380007E9F99 /* Utilities.swift */; };
+		F8A48F562613B03600A44DC2 /* SelectAvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A48F552613B03600A44DC2 /* SelectAvailabilityViewController.swift */; };
 		F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */; };
 		F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C3260FAF53003B87EF /* AppDelegate.swift */; };
 		F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C5260FAF53003B87EF /* SceneDelegate.swift */; };
@@ -25,9 +29,13 @@
 		02F6BB666BBA5ED6293A70C6 /* Pods-DriveWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriveWay.debug.xcconfig"; path = "Target Support Files/Pods-DriveWay/Pods-DriveWay.debug.xcconfig"; sourceTree = "<group>"; };
 		E84A40593F59A9873A80218C /* Pods-DriveWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriveWay.release.xcconfig"; path = "Target Support Files/Pods-DriveWay/Pods-DriveWay.release.xcconfig"; sourceTree = "<group>"; };
 		EE636D4B92674473E5D74755 /* Pods_DriveWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DriveWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMoreDataViewController.swift; sourceTree = "<group>"; };
+		F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorMoreDataViewController.swift; sourceTree = "<group>"; };
 		F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataEntryViewController.swift; sourceTree = "<group>"; };
+		F874A612261652600070610E /* AboutMeEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeEntryViewController.swift; sourceTree = "<group>"; };
 		F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorOrLearnerViewController.swift; sourceTree = "<group>"; };
 		F88605A926113380007E9F99 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		F8A48F552613B03600A44DC2 /* SelectAvailabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAvailabilityViewController.swift; sourceTree = "<group>"; };
 		F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAndPasswordEntryViewController.swift; sourceTree = "<group>"; };
 		F8DE32C0260FAF53003B87EF /* DriveWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriveWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8DE32C3260FAF53003B87EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +84,10 @@
 				F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */,
 				F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */,
 				F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */,
+				F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */,
+				F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */,
+				F8A48F552613B03600A44DC2 /* SelectAvailabilityViewController.swift */,
+				F874A612261652600070610E /* AboutMeEntryViewController.swift */,
 			);
 			path = "Login View Controllers";
 			sourceTree = "<group>";
@@ -232,10 +244,14 @@
 				F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */,
 				F852399D261201F200B3959D /* PersonalDataEntryViewController.swift in Sources */,
 				F8DE32C8260FAF53003B87EF /* LoginScreenViewController.swift in Sources */,
+				F81EBF0A26138030003F42DF /* LearnerMoreDataViewController.swift in Sources */,
 				F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */,
+				F874A613261652600070610E /* AboutMeEntryViewController.swift in Sources */,
+				F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */,
 				F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */,
 				F88605AA26113380007E9F99 /* Utilities.swift in Sources */,
 				F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */,
+				F8A48F562613B03600A44DC2 /* SelectAvailabilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,7 +34,7 @@ class LoginScreenViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    // Function that will restore the login bar when this view disappears
+    // Function that will restore the navigation bar when this view disappears
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(false, animated: animated)
