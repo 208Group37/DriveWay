@@ -70,7 +70,7 @@ class EmailAndPasswordEntryViewController: UIViewController {
             Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                 // If there is an error with the creation tell the user
                 if error != nil {
-                    self.showError("Error Creating user.")
+                    Utilities.showError("Error Creating user.", errorLabel: self.errorLabel)
                 }
                 // Otherwise add all of their entered data to the database
                 else {

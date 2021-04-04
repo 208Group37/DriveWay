@@ -40,7 +40,7 @@ class SelectAvailabilityViewController: UIViewController {
     
     // Variables from this view controller
     var availabilityChoices = [[Bool]]()
-    
+    var availabilityTimeChoices = [[String]]()
     
     // MARK: - UI Setup
     override func viewDidLoad() {
@@ -59,6 +59,7 @@ class SelectAvailabilityViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: Any) {
         getAvailabilityInfo()
+        availabilityTimeChoices = getTimeSlotFromBoolean()
     }
     
     
@@ -171,6 +172,24 @@ class SelectAvailabilityViewController: UIViewController {
         availabilityChoices.append(sunday)        
     }
     
+    // MARK: - Time Selection
+    func getTimeSlotFromBoolean() -> [[String]] {
+        var timeSlotsSelected = Array(repeating: Array(repeating: String(), count: 3), count: 7)
+        let morning = "07:00-12:00", afternoon = "12:00-17:00", evening = "17:00-22:00"
+        for i in 0...6 {
+            if availabilityChoices[i][0] == true{
+                timeSlotsSelected[i][0] = morning
+            }
+            if availabilityChoices[i][1] == true {
+                timeSlotsSelected[i][1] = afternoon
+            }
+            if availabilityChoices[i][2] {
+                timeSlotsSelected[i][2] = evening
+            }
+        }
+        return timeSlotsSelected
+    }
+    
     
     
     
@@ -183,7 +202,7 @@ class SelectAvailabilityViewController: UIViewController {
             let destination = segue.destination as! AboutMeEntryViewController
             destination.carOrMotorcycle = self.carOrMotorcycle
             destination.address = self.address
-            destination.availabilityChoices = self.availabilityChoices
+            destination.availabilityChoices = availabilityTimeChoices
         }
     }
 }

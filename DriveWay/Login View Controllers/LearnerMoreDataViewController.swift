@@ -81,7 +81,7 @@ class LearnerMoreDataViewController: UIViewController {
         let isThereAnError = validateFields()
         
         if isThereAnError == true {
-            showError("Please fill in all fields")
+            Utilities.showError("Please fill in all fields", errorLabel: errorLabel)
         } else {
             performSegue(withIdentifier: "toSelectAvailability", sender: nil)
         }
@@ -105,11 +105,6 @@ class LearnerMoreDataViewController: UIViewController {
             return true
         }
         return false
-    }
-    
-    func showError(_ message:String) {
-        errorLabel.text = message
-        errorLabel.isHidden = false
     }
     
     // MARK: - Navigation

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class AboutMeEntryViewController: UIViewController {
 
@@ -14,10 +16,11 @@ class AboutMeEntryViewController: UIViewController {
     // Variables passed from last segue
     var carOrMotorcycle = String()
     var address = [String]()
-    var availabilityChoices = [[Bool]]()
+    var availabilityChoices = [[String]]()
     
     @IBOutlet weak var aboutMeTextView: UITextView!
     @IBOutlet weak var confirmationButton: UIButton!
+    @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var finishButton: UIButton!
     
     // MARK: - UI Setup
@@ -44,17 +47,57 @@ class AboutMeEntryViewController: UIViewController {
     }
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        // Adds information to the database
+        
+        // Validate fields
+        let isThereAnError = validateFields()
+        
+        // If there is an error
+        if isThereAnError == true {
+            Utilities.showError("Please check the box", errorLabel: errorLabel)
+        } else {
+            
+            // Create a variable for the data to be added to the database
+            let dataToAdd: [String : Any] = [
+                "vehicle" : carOrMotorcycle,
+                "privateInfo" : [
+                    "addresses" : [
+                        "homeAddress" : [
+                            "line1" : address[0],
+                            "line2" : address[1],
+                            "city" : address[2],
+                            "postcode" : address[3]
+                        ]
+                    ]
+                ],
+                "aboutMe" : aboutMeTextView.text!,
+                "availability" : [
+                    "monday" : [availabilityChoices[0][0], availabilityChoices[0][1], availabilityChoices[0][2]],
+                    "tuesday" : [availabilityChoices[1][0], availabilityChoices[1][1], availabilityChoices[1][2]],
+                    "wednesday" : [availabilityChoices[2][0], availabilityChoices[2][1], availabilityChoices[2][2]],
+                    "thursday" : [availabilityChoices[3][0], availabilityChoices[3][1], availabilityChoices[3][2]],
+                    "friday" : [availabilityChoices[4][0], availabilityChoices[4][1], availabilityChoices[4][2]],
+                    "saturday" : [availabilityChoices[5][0], availabilityChoices[5][1], availabilityChoices[5][2]],
+                    "sunday" : [availabilityChoices[6][0], availabilityChoices[6][1], availabilityChoices[6][2]]
+                ]
+            ]
+            
+            // Adding the data to the database
+            let user = Auth.auth().currentUser!
+            
+            Utilities.addDataToUserDocument(user, collection: "Students", dataToAdd: dataToAdd)
+            
+            performSegue(withIdentifier: "toLearnerHomeScreen", sender: nil)
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Validation
+    func validateFields() -> Bool {
+        // If the confirmation button has not been pressed
+        if confirmationButton.isSelected == false {
+            // Then there is an error
+            return true
+        }
+        // Otherwise no error
+        return false
     }
-    */
-
 }

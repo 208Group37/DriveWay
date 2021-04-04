@@ -19,6 +19,8 @@ class PersonalDataEntryViewController: UIViewController, UIPickerViewDelegate, U
     @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var genderTextField: UITextField!
     
+    @IBOutlet weak var errorLabel: UILabel!
+    
     @IBOutlet weak var nextButton: UIButton!
     
     // Setting up the date and gender picker objects and the options for the gender picker
@@ -141,6 +143,20 @@ class PersonalDataEntryViewController: UIViewController, UIPickerViewDelegate, U
                 
         return false
     }
+    
+    // MARK: - Button Functions
+    
+    @IBAction func nextButtonPressed(_ sender: Any) {
+        
+        let isThereAnError = validateFields()
+        
+        if isThereAnError == true {
+            Utilities.showError("Please fill in all fields", errorLabel: errorLabel)
+        } else {
+            performSegue(withIdentifier: "toEmailAndPassword", sender: nil)
+        }
+    }
+    
 
     // MARK: - Navigation
 
@@ -156,9 +172,6 @@ class PersonalDataEntryViewController: UIViewController, UIPickerViewDelegate, U
             destination.dateOfBirth = dateOfBirthTextField.text!
             destination.gender = genderTextField.text!
             destination.accountType = accountType
-            
         }
     }
-    
-
 }

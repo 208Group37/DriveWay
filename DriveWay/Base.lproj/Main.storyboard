@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DSh-Z3-CGn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FsQ-6r-C1k">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -209,9 +209,16 @@
                                     <imageReference key="image" image="chevron.right" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
-                                    <segue destination="w3m-yV-Vac" kind="show" identifier="toEmailAndPassword" id="RKD-0Q-qoQ"/>
+                                    <action selector="nextButtonPressed:" destination="B5S-AR-x5I" eventType="touchUpInside" id="nxK-kY-tqh"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuJ-Rv-m66">
+                                <rect key="frame" x="51" y="632" width="288" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ubk-m5-xPJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -219,12 +226,14 @@
                     <navigationItem key="navigationItem" id="Buv-De-02r"/>
                     <connections>
                         <outlet property="dateOfBirthTextField" destination="12M-xX-eEa" id="08k-DF-Cij"/>
+                        <outlet property="errorLabel" destination="TuJ-Rv-m66" id="ZjQ-qf-8XM"/>
                         <outlet property="firstNameTextField" destination="P11-cT-sp1" id="Kfy-JN-DMg"/>
                         <outlet property="genderTextField" destination="Q1e-P1-mKv" id="Iw9-Ph-sNE"/>
                         <outlet property="lastNameTextField" destination="GNz-9R-sDj" id="7uv-dI-uiw"/>
                         <outlet property="nextButton" destination="IuM-45-h5U" id="B6o-QR-kif"/>
                         <outlet property="personalDetailsLabel" destination="rwG-Rf-DIa" id="OIg-KF-5GG"/>
                         <outlet property="warningLabel" destination="fOk-Px-GVX" id="cNA-pB-AKP"/>
+                        <segue destination="w3m-yV-Vac" kind="show" identifier="toEmailAndPassword" id="vwR-nK-mFq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4v-AN-Nh6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -437,6 +446,7 @@
                         <viewLayoutGuide key="safeArea" id="TIk-yK-plp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ub5-Xq-5tT"/>
                     <connections>
                         <outlet property="addressLineOneTextField" destination="934-sC-aCM" id="Rur-EK-fdP"/>
                         <outlet property="addressLineTwoTextField" destination="Agw-nl-M3n" id="Kl0-rO-eCA"/>
@@ -860,6 +870,13 @@
                                     <action selector="finishButtonPressed:" destination="DSh-Z3-CGn" eventType="touchUpInside" id="V3t-Mq-ToV"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e34-98-6oe">
+                                <rect key="frame" x="51" y="662" width="288" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q5r-mR-ejc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -868,12 +885,40 @@
                     <connections>
                         <outlet property="aboutMeTextView" destination="ayy-iK-J5i" id="1vn-Pz-qZz"/>
                         <outlet property="confirmationButton" destination="IRb-QQ-Cmy" id="6QI-Ga-vyl"/>
+                        <outlet property="errorLabel" destination="e34-98-6oe" id="15D-PO-7JI"/>
                         <outlet property="finishButton" destination="PLQ-3u-1dN" id="LLz-sr-wKx"/>
+                        <segue destination="Uzp-tS-O4G" kind="show" identifier="toLearnerHomeScreen" id="jFf-k7-Jsb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyA-53-HtY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6400" y="772.74881516587675"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Ba0-hE-xdI">
+            <objects>
+                <viewController id="ecH-q4-VLs" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Twi-tR-MdT">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LEARNER HOME SCREEN" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7g-1A-5eF">
+                                <rect key="frame" x="6" y="241" width="368" height="143"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RGM-WV-wde"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="SxK-1H-OZx"/>
+                    <navigationItem key="navigationItem" id="JIE-uR-mkX"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GZS-vg-Dcy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8425" y="773"/>
         </scene>
         <!--Instructor More Data View Controller-->
         <scene sceneID="6Gv-Bp-32C">
@@ -927,6 +972,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kr6-p9-N7Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-213.84615384615384" y="93.127962085308056"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="SOr-xI-LwX">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Uzp-tS-O4G" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="WKv-Ac-cTj"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Vs-Wj-RE0">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ecH-q4-VLs" kind="relationship" relationship="viewControllers" id="5vc-kM-RoC"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cpo-05-rJK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7495" y="773"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

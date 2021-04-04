@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
+
 
 // Custom class containing methods that will allow us to keep a consistent style throughout the app
 class Utilities {
@@ -25,6 +28,12 @@ class Utilities {
         textView.layer.masksToBounds = true
         textView.layer.borderColor = UIColor(named: "black")?.cgColor
         textView.layer.borderWidth = 3
+    }
+    
+    // Displaying the error message on a label
+    static func showError(_ message:String, errorLabel: UILabel) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
     }
     
     // MARK: - Button Style Functions
@@ -83,6 +92,37 @@ class Utilities {
             button.isSelected = true
         } else {
             button.isSelected = false
+        }
+    }
+    
+    // MARK: - Firebase Functions
+    // This function recieves a user and a collection and gives all documents that have that user involved in that collection
+    static func addDataToUserDocument(_ user: User, collection: String, dataToAdd: [String : Any]) {
+        
+        // Create database reference
+        let database = Firestore.firestore()
+        
+        // Creating a reference to the collection
+        let collectionReference = database.collection(collection)
+        
+        // Creating a query for all documents that match the userID
+        let query = collectionReference.whereField("userID", isEqualTo: user.uid)
+        
+        // Getting the documents that forfill the query
+        query.getDocuments() { (snapshot, err) in
+            // If there is an error
+            if err != nil {
+                // Print the error and a message
+                print("There was an error obtaining the documentID: \(err!)")
+            // Otherwise
+            } else {
+                // For every document in the snapshot
+                for document in snapshot!.documents {
+                    // Add the data to the document
+                    let documentReference = collectionReference.document(document.documentID)
+                    documentReference.setData(dataToAdd, merge: true)
+                }
+            }
         }
     }
 }
