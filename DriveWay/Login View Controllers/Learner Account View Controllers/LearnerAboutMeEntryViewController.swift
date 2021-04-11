@@ -1,5 +1,5 @@
 //
-//  AboutMeEntryViewController.swift
+//  LearnerAboutMeEntryViewController.swift
 //  DriveWay
 //
 //  Created by Morgan Eckersley on 01/04/2021.
@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
-class AboutMeEntryViewController: UIViewController {
+class LearnerAboutMeEntryViewController: UIViewController {
 
     
     // MARK: - Variables
@@ -31,6 +31,7 @@ class AboutMeEntryViewController: UIViewController {
         setUpObjects()
     }
     
+    // Styling the objects on the view
     func setUpObjects() {
         Utilities.styleTextView(aboutMeTextView)
         Utilities.styleButtonGreen(finishButton)
@@ -42,10 +43,12 @@ class AboutMeEntryViewController: UIViewController {
     }
     
     // MARK: - Button Functions
+    // Toggling the confirmation button
     @IBAction func confirmationButtonPressed(_ sender: Any) {
         Utilities.toggleButton(confirmationButton)
     }
     
+    // When the finish button is pressed
     @IBAction func finishButtonPressed(_ sender: Any) {
         
         // Validate fields

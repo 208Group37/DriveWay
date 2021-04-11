@@ -13,6 +13,7 @@ class InstructorOrLearnerViewController: UIViewController {
     @IBOutlet weak var instructorButton: UIButton!
     @IBOutlet weak var learnerButton: UIButton!
     
+    // Variable for the account type to pass to the next view
     var accountType = String()
     
     // MARK: - UISetup
@@ -22,6 +23,7 @@ class InstructorOrLearnerViewController: UIViewController {
         setUpObjects()
     }
     
+    // Function to stylize all objects in the view
     func setUpObjects() {
         Utilities.styleButtonNeutral(instructorButton)
         Utilities.styleButtonNeutral(learnerButton)

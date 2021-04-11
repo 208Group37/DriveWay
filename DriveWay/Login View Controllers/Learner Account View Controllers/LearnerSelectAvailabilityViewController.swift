@@ -1,5 +1,5 @@
 //
-//  SelectAvailabilityViewController.swift
+//  LearnerSelectAvailabilityViewController.swift
 //  DriveWay
 //
 //  Created by Morgan Eckersley on 30/03/2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectAvailabilityViewController: UIViewController {
+class LearnerSelectAvailabilityViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var mondayMorningButton: UIButton!
@@ -50,6 +50,7 @@ class SelectAvailabilityViewController: UIViewController {
         setUpObjects()
     }
     
+    // Styling the objects on this view
     func setUpObjects() {
         Utilities.styleButtonNeutral(nextButton)
     }
@@ -57,12 +58,15 @@ class SelectAvailabilityViewController: UIViewController {
     
     // MARK: - Button Functions
     
+    // When the next button is pressed...
     @IBAction func nextButtonPressed(_ sender: Any) {
+        // All data is grabbed from this view
         getAvailabilityInfo()
+        // Data is converted from booleans to the time slots
         availabilityTimeChoices = getTimeSlotFromBoolean()
     }
     
-    
+    // All of these functions toggle the selected button when it is pressed
     //MARK: - Monday
     @IBAction func mondayMorningSelected(_ sender: Any) {
         Utilities.toggleButton(mondayMorningButton)
@@ -155,6 +159,7 @@ class SelectAvailabilityViewController: UIViewController {
     }
     
     // MARK: - Validation
+    // Creates 2D array of all user inputs
     func getAvailabilityInfo() {
         let monday: [Bool] = [mondayMorningButton.isSelected, mondayAfternoonButton.isSelected, mondayEveningButton.isSelected]
         let tuesday: [Bool] = [tuesdayMorningButton.isSelected, tuesdayAfternoonButton.isSelected, tuesdayEveningButton.isSelected]
@@ -173,6 +178,7 @@ class SelectAvailabilityViewController: UIViewController {
     }
     
     // MARK: - Time Selection
+    // Converts 2D array of booleans to 2D array of the timeslots as strings
     func getTimeSlotFromBoolean() -> [[String]] {
         var timeSlotsSelected = Array(repeating: Array(repeating: String(), count: 3), count: 7)
         let morning = "07:00-12:00", afternoon = "12:00-17:00", evening = "17:00-22:00"
@@ -198,8 +204,10 @@ class SelectAvailabilityViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueName = segue.identifier
         
+        // When the segue is triggered
         if segueName == "toAboutMe" {
-            let destination = segue.destination as! AboutMeEntryViewController
+            // Pass all info to the destination
+            let destination = segue.destination as! LearnerAboutMeEntryViewController
             destination.carOrMotorcycle = self.carOrMotorcycle
             destination.address = self.address
             destination.availabilityChoices = availabilityTimeChoices
