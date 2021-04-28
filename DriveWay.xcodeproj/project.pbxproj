@@ -93,6 +93,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F843A9962639E7330054DDD4 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F8DE32C9260FAF53003B87EF /* Main.storyboard */,
+				F87057E826398CB400442495 /* Learner.storyboard */,
+				F87057EB26398CC500442495 /* Instructor.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		F846DA2826112DBC0021C5C3 /* Login View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,9 +157,7 @@
 				F85CE6082639789B0080BE8C /* Instructor View Controllers */,
 				F846DA2826112DBC0021C5C3 /* Login View Controllers */,
 				F8DE32CC260FAF53003B87EF /* Assets.xcassets */,
-				F8DE32C9260FAF53003B87EF /* Main.storyboard */,
-				F87057E826398CB400442495 /* Learner.storyboard */,
-				F87057EB26398CC500442495 /* Instructor.storyboard */,
+				F843A9962639E7330054DDD4 /* Storyboards */,
 				F8DE32CE260FAF53003B87EF /* LaunchScreen.storyboard */,
 				F8DE32D1260FAF53003B87EF /* Info.plist */,
 				F8F85A832611F57C00FDFFD3 /* GoogleService-Info.plist */,
