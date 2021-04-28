@@ -10,11 +10,13 @@
 		6FF6B991AD16B85B35737CD8 /* Pods_DriveWay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE636D4B92674473E5D74755 /* Pods_DriveWay.framework */; };
 		F81EBF0A26138030003F42DF /* LearnerMoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */; };
 		F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */; };
+		F825EC1D261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825EC1C261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift */; };
+		F825EC20261E155F0062D24F /* InstructorAvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825EC1F261E155F0062D24F /* InstructorAvailabilityViewController.swift */; };
 		F852399D261201F200B3959D /* PersonalDataEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */; };
-		F874A613261652600070610E /* AboutMeEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874A612261652600070610E /* AboutMeEntryViewController.swift */; };
+		F874A613261652600070610E /* LearnerAboutMeEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */; };
 		F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */; };
 		F88605AA26113380007E9F99 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88605A926113380007E9F99 /* Utilities.swift */; };
-		F8A48F562613B03600A44DC2 /* SelectAvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A48F552613B03600A44DC2 /* SelectAvailabilityViewController.swift */; };
+		F8A48F562613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A48F552613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift */; };
 		F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */; };
 		F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C3260FAF53003B87EF /* AppDelegate.swift */; };
 		F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C5260FAF53003B87EF /* SceneDelegate.swift */; };
@@ -22,6 +24,8 @@
 		F8DE32CB260FAF53003B87EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8DE32C9260FAF53003B87EF /* Main.storyboard */; };
 		F8DE32CD260FAF53003B87EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8DE32CC260FAF53003B87EF /* Assets.xcassets */; };
 		F8DE32D0260FAF53003B87EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8DE32CE260FAF53003B87EF /* LaunchScreen.storyboard */; };
+		F8DFEB4D261B57AC00841738 /* InstructorAddCarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DFEB4C261B57AC00841738 /* InstructorAddCarDetailsViewController.swift */; };
+		F8DFEB50261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DFEB4F261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift */; };
 		F8F85A842611F57C00FDFFD3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8F85A832611F57C00FDFFD3 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -31,11 +35,13 @@
 		EE636D4B92674473E5D74755 /* Pods_DriveWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DriveWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMoreDataViewController.swift; sourceTree = "<group>"; };
 		F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorMoreDataViewController.swift; sourceTree = "<group>"; };
+		F825EC1C261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorPersonalDataEntryViewController.swift; sourceTree = "<group>"; };
+		F825EC1F261E155F0062D24F /* InstructorAvailabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorAvailabilityViewController.swift; sourceTree = "<group>"; };
 		F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataEntryViewController.swift; sourceTree = "<group>"; };
-		F874A612261652600070610E /* AboutMeEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeEntryViewController.swift; sourceTree = "<group>"; };
+		F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerAboutMeEntryViewController.swift; sourceTree = "<group>"; };
 		F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorOrLearnerViewController.swift; sourceTree = "<group>"; };
 		F88605A926113380007E9F99 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		F8A48F552613B03600A44DC2 /* SelectAvailabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAvailabilityViewController.swift; sourceTree = "<group>"; };
+		F8A48F552613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerSelectAvailabilityViewController.swift; sourceTree = "<group>"; };
 		F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAndPasswordEntryViewController.swift; sourceTree = "<group>"; };
 		F8DE32C0260FAF53003B87EF /* DriveWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriveWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8DE32C3260FAF53003B87EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +51,8 @@
 		F8DE32CC260FAF53003B87EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8DE32CF260FAF53003B87EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8DE32D1260FAF53003B87EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8DFEB4C261B57AC00841738 /* InstructorAddCarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorAddCarDetailsViewController.swift; sourceTree = "<group>"; };
+		F8DFEB4F261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorAddMotorcycleDetailsViewController.swift; sourceTree = "<group>"; };
 		F8F85A832611F57C00FDFFD3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,14 +88,9 @@
 		F846DA2826112DBC0021C5C3 /* Login View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F8DE32C7260FAF53003B87EF /* LoginScreenViewController.swift */,
-				F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */,
-				F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */,
-				F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */,
-				F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */,
-				F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */,
-				F8A48F552613B03600A44DC2 /* SelectAvailabilityViewController.swift */,
-				F874A612261652600070610E /* AboutMeEntryViewController.swift */,
+				F8DFEB44261B54DC00841738 /* General Account View Controllers */,
+				F8DFEB47261B552000841738 /* Instructor Account View Controllers */,
+				F8DFEB45261B550C00841738 /* Learner Account View Controllers */,
 			);
 			path = "Login View Controllers";
 			sourceTree = "<group>";
@@ -124,6 +127,39 @@
 				F8F85A832611F57C00FDFFD3 /* GoogleService-Info.plist */,
 			);
 			path = DriveWay;
+			sourceTree = "<group>";
+		};
+		F8DFEB44261B54DC00841738 /* General Account View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F8DE32C7260FAF53003B87EF /* LoginScreenViewController.swift */,
+				F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */,
+				F852399C261201F200B3959D /* PersonalDataEntryViewController.swift */,
+				F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */,
+			);
+			path = "General Account View Controllers";
+			sourceTree = "<group>";
+		};
+		F8DFEB45261B550C00841738 /* Learner Account View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */,
+				F8A48F552613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift */,
+				F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */,
+			);
+			path = "Learner Account View Controllers";
+			sourceTree = "<group>";
+		};
+		F8DFEB47261B552000841738 /* Instructor Account View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */,
+				F8DFEB4C261B57AC00841738 /* InstructorAddCarDetailsViewController.swift */,
+				F8DFEB4F261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift */,
+				F825EC1C261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift */,
+				F825EC1F261E155F0062D24F /* InstructorAvailabilityViewController.swift */,
+			);
+			path = "Instructor Account View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,14 +280,18 @@
 				F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */,
 				F852399D261201F200B3959D /* PersonalDataEntryViewController.swift in Sources */,
 				F8DE32C8260FAF53003B87EF /* LoginScreenViewController.swift in Sources */,
+				F8DFEB4D261B57AC00841738 /* InstructorAddCarDetailsViewController.swift in Sources */,
 				F81EBF0A26138030003F42DF /* LearnerMoreDataViewController.swift in Sources */,
 				F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */,
-				F874A613261652600070610E /* AboutMeEntryViewController.swift in Sources */,
+				F874A613261652600070610E /* LearnerAboutMeEntryViewController.swift in Sources */,
+				F825EC20261E155F0062D24F /* InstructorAvailabilityViewController.swift in Sources */,
+				F8DFEB50261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift in Sources */,
 				F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */,
 				F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */,
+				F825EC1D261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift in Sources */,
 				F88605AA26113380007E9F99 /* Utilities.swift in Sources */,
 				F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */,
-				F8A48F562613B03600A44DC2 /* SelectAvailabilityViewController.swift in Sources */,
+				F8A48F562613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

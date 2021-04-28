@@ -76,13 +76,17 @@ class PersonalDataEntryViewController: UIViewController, UIPickerViewDelegate, U
         dateOfBirthTextField.inputView = datePicker
     }
     
+    // Function for when the done button is pressed
     @objc func dateSelected(){
+        // Creates a format for the date with the correct layout and style for date and time
         let dateFormatter = DateFormatter()
         dateFormatter.locale = datePicker.locale
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
         
+        // Changes the text field to be the selected date
         dateOfBirthTextField.text = dateFormatter.string(from: datePicker.date)
+        // Dismissing the keyboard
         self.view.endEditing(true)
     }
     
@@ -100,8 +104,6 @@ class PersonalDataEntryViewController: UIViewController, UIPickerViewDelegate, U
         
         genderTextField.inputAccessoryView = toolbar
         genderTextField.inputView = genderPicker
-        
-
     }
     
     // When done is pressed set the text field to be what the user chose

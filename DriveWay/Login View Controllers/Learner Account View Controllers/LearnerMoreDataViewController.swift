@@ -77,21 +77,29 @@ class LearnerMoreDataViewController: UIViewController {
         carOption.isSelected = false
     }
     
+    // When the next button is pressed
     @IBAction func nextButtonPressed(_ sender: Any) {
+        // Validate the fields
         let isThereAnError = validateFields()
         
+        // If there is an error...
         if isThereAnError == true {
+            // Show the error to the user
             Utilities.showError("Please fill in all fields", errorLabel: errorLabel)
         } else {
+            // Otherwise perform the segue
             performSegue(withIdentifier: "toSelectAvailability", sender: nil)
         }
     }
     
-    //MARK: - Validation
+    // MARK: - Validation
+    // Validating the fields in this view
     func validateFields() -> Bool {
+        // Ensure that both car and motorbike arent both checked or unchecked
         if carOption.isSelected == false && motorcycleOption.isSelected == false {
             return true
         }
+        // Ensuring the text fields arent empty, if they are return error
         if addressLineOneTextField.text?.trimmingCharacters(in: .newlines) == "" {
             return true
         }
@@ -104,6 +112,7 @@ class LearnerMoreDataViewController: UIViewController {
         if postcodeTextField.text?.trimmingCharacters(in: .newlines) == "" {
             return true
         }
+        // Otherwise, return no error
         return false
     }
     
@@ -112,15 +121,17 @@ class LearnerMoreDataViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let segueName = segue.identifier
-        
+        // When the segue is called
         if segueName == "toSelectAvailability" {
-            let destination = segue.destination as! SelectAvailabilityViewController
+            let destination = segue.destination as! LearnerSelectAvailabilityViewController
+            // Pass over the vehicle type that the learner wants to learn to drive/ride
             if carOption.isSelected == true {
                 destination.carOrMotorcycle = "car"
             }
             if motorcycleOption.isSelected == true {
                 destination.carOrMotorcycle = "motorcycle"
             }
+            // Pass over the personal address of the user
             destination.address.append(addressLineOneTextField.text!)
             destination.address.append(addressLineTwoTextField.text!)
             destination.address.append(cityTextField.text!)

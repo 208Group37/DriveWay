@@ -149,13 +149,17 @@ class EmailAndPasswordEntryViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        // Identifying the activated segway
         let segueName = segue.identifier
+        // If instructor was selected
         if segueName == "toInstructorMoreData" {
+            // Pass the first name to the instructor view
             let destination = segue.destination as! InstructorMoreDataViewController
             destination.firstName = self.firstName
         }
+        // If learner
         if segueName == "toLearnerMoreData" {
+            // Pass the name to the learner view
             let destination = segue.destination as! LearnerMoreDataViewController
             destination.firstName = self.firstName
         }
