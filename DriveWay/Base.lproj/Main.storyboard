@@ -9,49 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 1-->
-        <scene sceneID="efl-Ra-CND">
-            <objects>
-                <viewController id="xND-y4-TdJ" customClass="InstructorHomeScreenViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="a23-ol-QNe">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="INSTRUCTOR HOME SCREEN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-Qn-I3k">
-                                <rect key="frame" x="82" y="362" width="227" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="mfs-kx-G0B"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="LdW-gE-fr8"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QZk-en-vTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="165" y="-1440"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="MKx-G7-plK">
-            <objects>
-                <tabBarController id="MaM-0h-gZ4" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="cZk-DF-PH5"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ysz-qn-4uH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="xND-y4-TdJ" kind="relationship" relationship="viewControllers" id="uTE-34-lKx"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5c8-Rd-DCW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="715" y="-723"/>
-        </scene>
         <!--Login Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -128,13 +85,33 @@
                         <outlet property="logoImageView" destination="uZY-9S-OUD" id="t42-ch-WYJ"/>
                         <outlet property="passwordLabel" destination="ZzC-RP-Obr" id="i8P-fj-e3X"/>
                         <outlet property="passwordTextField" destination="6ZX-fY-6bz" id="LMm-H3-1yw"/>
-                        <segue destination="Uzp-tS-O4G" kind="show" identifier="toLearnerHomeScreen" id="5Gh-AI-AbJ"/>
-                        <segue destination="MaM-0h-gZ4" kind="show" identifier="toInstructorHomeScreen" id="22D-BG-7z1"/>
+                        <segue destination="fpM-DP-1Z7" kind="show" identifier="toLearnerHomeScreen" id="TeX-sp-Opc"/>
+                        <segue destination="Lz9-ML-sFJ" kind="show" identifier="toInstructorHomeScreen" id="jOr-uD-K97"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="715.38461538461536" y="93.127962085308056"/>
+        </scene>
+        <!--Learner-->
+        <scene sceneID="jSq-HZ-7qp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Learner" id="fpM-DP-1Z7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Hn6-iy-ZjT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EEG-U2-y1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1672" y="-154"/>
+        </scene>
+        <!--Instructor-->
+        <scene sceneID="juK-gb-X8G">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Instructor" id="Lz9-ML-sFJ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="fci-DU-lpw"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDw-zn-tpl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1682" y="218"/>
         </scene>
         <!--Instructor Or Learner View Controller-->
         <scene sceneID="k9o-Aq-6oi">
@@ -943,38 +920,12 @@
                         <outlet property="confirmationButton" destination="IRb-QQ-Cmy" id="6QI-Ga-vyl"/>
                         <outlet property="errorLabel" destination="e34-98-6oe" id="15D-PO-7JI"/>
                         <outlet property="finishButton" destination="PLQ-3u-1dN" id="LLz-sr-wKx"/>
-                        <segue destination="Uzp-tS-O4G" kind="show" identifier="toLearnerHomeScreen" id="jFf-k7-Jsb"/>
+                        <segue destination="fpM-DP-1Z7" kind="show" identifier="toLearnerHomeScreen" id="uFI-TN-VO3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyA-53-HtY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5465" y="1489"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="Ba0-hE-xdI">
-            <objects>
-                <viewController id="ecH-q4-VLs" customClass="LearnerHomeScreenViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Twi-tR-MdT">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LEARNER HOME SCREEN" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7g-1A-5eF">
-                                <rect key="frame" x="6" y="241" width="368" height="143"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="RGM-WV-wde"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="SxK-1H-OZx"/>
-                    <navigationItem key="navigationItem" id="JIE-uR-mkX"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GZS-vg-Dcy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2725" y="111"/>
         </scene>
         <!--Instructor More Data View Controller-->
         <scene sceneID="6Gv-Bp-32C">
@@ -1083,25 +1034,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kr6-p9-N7Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-213.84615384615384" y="93.127962085308056"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="SOr-xI-LwX">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Uzp-tS-O4G" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="WKv-Ac-cTj"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Vs-Wj-RE0">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="ecH-q4-VLs" kind="relationship" relationship="viewControllers" id="5vc-kM-RoC"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cpo-05-rJK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1783" y="111"/>
         </scene>
         <!--Instructor Add Car Details View Controller-->
         <scene sceneID="3wG-Sg-0bu">
@@ -1974,7 +1906,7 @@
                         <outlet property="finishButton" destination="hDf-rP-ePz" id="i3C-Fi-RKK"/>
                         <outlet property="priceTextField" destination="Kol-gn-MXc" id="zXN-kt-KxD"/>
                         <outlet property="startTimeTextField" destination="swP-Og-toc" id="Nkw-Wy-gsi"/>
-                        <segue destination="MaM-0h-gZ4" kind="show" identifier="toInstructorHomeScreen" id="OiQ-Ch-ATd"/>
+                        <segue destination="Lz9-ML-sFJ" kind="show" identifier="toInstructorHomeScreen" id="CTn-eX-Dla"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gi-B1-Oea" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1983,9 +1915,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jFf-k7-Jsb"/>
         <segue reference="ZTG-dz-LhD"/>
-        <segue reference="OiQ-Ch-ATd"/>
+        <segue reference="CTn-eX-Dla"/>
+        <segue reference="uFI-TN-VO3"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="DriveWayLogo" width="680" height="324"/>
