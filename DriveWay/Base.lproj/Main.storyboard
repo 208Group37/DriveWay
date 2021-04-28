@@ -9,6 +9,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Item 1-->
+        <scene sceneID="efl-Ra-CND">
+            <objects>
+                <viewController id="xND-y4-TdJ" customClass="InstructorHomeScreenViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a23-ol-QNe">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="INSTRUCTOR HOME SCREEN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WW-Qn-I3k">
+                                <rect key="frame" x="82" y="362" width="227" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mfs-kx-G0B"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="LdW-gE-fr8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QZk-en-vTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="165" y="-1440"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="MKx-G7-plK">
+            <objects>
+                <tabBarController id="MaM-0h-gZ4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="cZk-DF-PH5"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ysz-qn-4uH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="xND-y4-TdJ" kind="relationship" relationship="viewControllers" id="uTE-34-lKx"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5c8-Rd-DCW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="715" y="-723"/>
+        </scene>
         <!--Login Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -85,6 +128,8 @@
                         <outlet property="logoImageView" destination="uZY-9S-OUD" id="t42-ch-WYJ"/>
                         <outlet property="passwordLabel" destination="ZzC-RP-Obr" id="i8P-fj-e3X"/>
                         <outlet property="passwordTextField" destination="6ZX-fY-6bz" id="LMm-H3-1yw"/>
+                        <segue destination="Uzp-tS-O4G" kind="show" identifier="toLearnerHomeScreen" id="5Gh-AI-AbJ"/>
+                        <segue destination="MaM-0h-gZ4" kind="show" identifier="toInstructorHomeScreen" id="22D-BG-7z1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -137,7 +182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UPp-OO-ya4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1650.7692307692307" y="425.82938388625593"/>
+            <point key="canvasLocation" x="715" y="1142"/>
         </scene>
         <!--Personal Data Entry View Controller-->
         <scene sceneID="o6M-0x-wom">
@@ -249,7 +294,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g4v-AN-Nh6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2609" y="426"/>
+            <point key="canvasLocation" x="1672" y="1142"/>
         </scene>
         <!--Email And Password Entry View Controller-->
         <scene sceneID="Pq2-GG-dgv">
@@ -349,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xAq-C0-3RE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3461.5384615384614" y="425.82938388625593"/>
+            <point key="canvasLocation" x="2526" y="1142"/>
         </scene>
         <!--Learner More Data View Controller-->
         <scene sceneID="zCb-He-vQ4">
@@ -473,7 +518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez5-9P-zxs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4450.7692307692305" y="773.45971563981038"/>
+            <point key="canvasLocation" x="3515" y="1489"/>
         </scene>
         <!--Learner Select Availability View Controller-->
         <scene sceneID="b9l-rv-LY8">
@@ -825,7 +870,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLn-Uq-7pL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5423" y="773"/>
+            <point key="canvasLocation" x="4486" y="1489"/>
         </scene>
         <!--Learner About Me Entry View Controller-->
         <scene sceneID="rTw-b0-kFG">
@@ -903,12 +948,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IyA-53-HtY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6400" y="772.74881516587675"/>
+            <point key="canvasLocation" x="5465" y="1489"/>
         </scene>
         <!--Item-->
         <scene sceneID="Ba0-hE-xdI">
             <objects>
-                <viewController id="ecH-q4-VLs" sceneMemberID="viewController">
+                <viewController id="ecH-q4-VLs" customClass="LearnerHomeScreenViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Twi-tR-MdT">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -929,7 +974,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GZS-vg-Dcy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8425" y="773"/>
+            <point key="canvasLocation" x="2725" y="111"/>
         </scene>
         <!--Instructor More Data View Controller-->
         <scene sceneID="6Gv-Bp-32C">
@@ -1019,7 +1064,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXt-os-MDi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4450.7692307692305" y="77.488151658767762"/>
+            <point key="canvasLocation" x="3515" y="793"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cPv-Nw-Nvl">
@@ -1056,7 +1101,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cpo-05-rJK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7495" y="773"/>
+            <point key="canvasLocation" x="1783" y="111"/>
         </scene>
         <!--Instructor Add Car Details View Controller-->
         <scene sceneID="3wG-Sg-0bu">
@@ -1254,18 +1299,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nr4-B9-PA2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5591" y="-662"/>
+            <point key="canvasLocation" x="4486" y="380"/>
         </scene>
         <!--Instructor Add Motorcycle Details View Controller-->
         <scene sceneID="mIp-kJ-Y51">
             <objects>
                 <viewController restorationIdentifier="InstructorAddMotorcycleDetailsViewController" id="o6n-Mv-p6a" customClass="InstructorAddMotorcycleDetailsViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r1j-84-voO">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="1075"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="483"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rA-Gf-J3T">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="1041"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="483"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNU-NH-X6i">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="1075"/>
@@ -1446,7 +1491,6 @@
                             <constraint firstItem="9rA-Gf-J3T" firstAttribute="top" secondItem="r1j-84-voO" secondAttribute="top" id="xve-Wy-2y6"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="390" height="1075"/>
                     <connections>
                         <outlet property="crashCourseOption" destination="iQO-Hq-ZH2" id="mkA-1V-fNR"/>
                         <outlet property="engineClassTextField" destination="sLu-nr-PZJ" id="AGg-ue-7df"/>
@@ -1464,14 +1508,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGQ-wi-ayA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5590.7692307692305" y="22.748815165876778"/>
+            <point key="canvasLocation" x="4486" y="953"/>
         </scene>
         <!--Instructor Personal Data Entry View Controller-->
         <scene sceneID="9ei-Dg-nDV">
             <objects>
                 <viewController id="BSh-E7-HUY" customClass="InstructorPersonalDataEntryViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ckr-7D-ih9">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="1400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OGu-px-my3">
@@ -1729,7 +1773,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PqN-rQ-0yN"/>
-                    <size key="freeformSize" width="390" height="1400"/>
                     <connections>
                         <outlet property="aboutMeTextField" destination="1G3-fG-dPi" id="ajT-dZ-mua"/>
                         <outlet property="addressLineOneTextField" destination="nYg-aX-uMB" id="MVd-pv-T5g"/>
@@ -1749,7 +1792,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7bx-f6-zi4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6677" y="-336"/>
+            <point key="canvasLocation" x="5280" y="683"/>
         </scene>
         <!--Instructor Availability View Controller-->
         <scene sceneID="21v-5R-oK0">
@@ -1931,15 +1974,18 @@
                         <outlet property="finishButton" destination="hDf-rP-ePz" id="i3C-Fi-RKK"/>
                         <outlet property="priceTextField" destination="Kol-gn-MXc" id="zXN-kt-KxD"/>
                         <outlet property="startTimeTextField" destination="swP-Og-toc" id="Nkw-Wy-gsi"/>
+                        <segue destination="MaM-0h-gZ4" kind="show" identifier="toInstructorHomeScreen" id="OiQ-Ch-ATd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gi-B1-Oea" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7791" y="-336"/>
+            <point key="canvasLocation" x="6322" y="682"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="jFf-k7-Jsb"/>
         <segue reference="ZTG-dz-LhD"/>
+        <segue reference="OiQ-Ch-ATd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="DriveWayLogo" width="680" height="324"/>

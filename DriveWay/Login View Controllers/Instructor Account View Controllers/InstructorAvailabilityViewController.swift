@@ -267,6 +267,8 @@ class InstructorAvailabilityViewController: UIViewController, UIPickerViewDelega
             let user = Auth.auth().currentUser!
             Utilities.addDataToUserDocument(user, collection: "Instructors", dataToAdd: dataToAdd)
             
+            performSegue(withIdentifier: "toInstructorHomeScreen", sender: nil)
+            
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 import FirebaseAuth
 
 // Class for the login screen view conroller
@@ -87,6 +88,25 @@ class LoginScreenViewController: UIViewController {
             // Otherwise the user is signed in
             print("User signs in successfully")
             let userInfo = Auth.auth().currentUser
+            
+            
+            // Decide if user is instructor or learner and perform segue
+            
+            let database = Firestore.firestore()
+            let collectionReference = database.collection("Students")
+            let query = collectionReference.whereField("userID", isEqualTo: userInfo!.uid)
+            
+            query.getDocuments { (snapshot, err) in
+                if err != nil {
+                    print("There was an error, \(err.debugDescription)")
+                } else {
+                    if snapshot!.documents.isEmpty {
+                        self.performSegue(withIdentifier: "toInstructorHomeScreen", sender: nil)
+                    } else {
+                        self.performSegue(withIdentifier: "toLearnerHomeScreen", sender: nil)
+                    }
+                }
+            }
           }
         }
     }
@@ -104,6 +124,17 @@ class LoginScreenViewController: UIViewController {
         }
         // Else there is no error and return false
         return false
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let segueName = segue.identifier
+        
+        if segueName == "toLearnerHomeScreen" {
+            let destination = segue.destination
+            
+        }
     }
 }
 
