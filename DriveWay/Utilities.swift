@@ -125,4 +125,21 @@ class Utilities {
             }
         }
     }
+    
+    static func calculateAge(birthday: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_GB")
+        
+        let birthdate = dateFormatter.date(from: birthday)!
+        
+        let calendar = Calendar.current
+        
+        let today = Date()
+        
+        let components = calendar.dateComponents([.year], from: birthdate, to: today)
+        
+        return Int(components.year!)
+    }
 }
