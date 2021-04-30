@@ -101,9 +101,11 @@ class LoginScreenViewController: UIViewController {
                     print("There was an error, \(err.debugDescription)")
                 } else {
                     if snapshot!.documents.isEmpty {
-                        self.performSegue(withIdentifier: "toInstructorHomeScreen", sender: nil)
+                        self.performSegue(withIdentifier: "toInstructorHomeScreen", sender: self)
+                        self.navigationController?.setNavigationBarHidden(true, animated: false)
                     } else {
-                        self.performSegue(withIdentifier: "toLearnerHomeScreen", sender: nil)
+                        self.performSegue(withIdentifier: "toLearnerHomeScreen", sender: self)
+                        self.navigationController?.setNavigationBarHidden(true, animated: false)
                     }
                 }
             }
@@ -124,17 +126,6 @@ class LoginScreenViewController: UIViewController {
         }
         // Else there is no error and return false
         return false
-    }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let segueName = segue.identifier
-        
-        if segueName == "toLearnerHomeScreen" {
-            let destination = segue.destination
-            
-        }
     }
 }
 

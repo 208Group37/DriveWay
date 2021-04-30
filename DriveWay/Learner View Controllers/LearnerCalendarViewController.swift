@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class LearnerHomeScreenViewController: UIViewController {
+class LearnerCalendarViewController: UIViewController {
 
     // MARK: - Variables
     let userInfo = Auth.auth().currentUser
@@ -19,6 +19,7 @@ class LearnerHomeScreenViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
     
 
     /*

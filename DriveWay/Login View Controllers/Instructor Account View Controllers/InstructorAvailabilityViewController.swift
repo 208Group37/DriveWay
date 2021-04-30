@@ -201,6 +201,7 @@ class InstructorAvailabilityViewController: UIViewController, UIPickerViewDelega
             // Create array of all data that would be added if the instructor is a car instructor
             if vehicleInfo["type"] as! String == "car" {
                 dataToAdd = [ "vehicle" : vehicleInfo["type"]!,
+                              "aboutMe" : personalData["aboutMe"] ?? "",
                                   "lesson" : ["crashCourses" :  crashCourse,
                                               "operatingRadius" : distanceForALesson,
                                               "price" : price],
@@ -233,6 +234,7 @@ class InstructorAvailabilityViewController: UIViewController, UIPickerViewDelega
             // Create array of all data that will be added if the instructor is a motorcycle instructor
             if vehicleInfo["type"] as! String == "motorcycle" {
                 dataToAdd = [ "vehicle" : vehicleInfo["type"]!,
+                              "aboutMe" : personalData["aboutMe"] ?? "",
                                   "lesson" : ["crashCourses" :  crashCourse,
                                               "operatingRadius" : distanceForALesson,
                                               "price" : price],

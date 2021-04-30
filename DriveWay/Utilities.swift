@@ -30,6 +30,12 @@ class Utilities {
         textView.layer.borderWidth = 3
     }
     
+    static func styleTextViewNonInteractive(_ textView:UITextView) {
+        textView.layer.masksToBounds = true
+        textView.layer.borderColor = UIColor(named: "black")?.cgColor
+        textView.layer.borderWidth = 3
+    }
+    
     // Displaying the error message on a label
     static func showError(_ message:String, errorLabel: UILabel) {
         errorLabel.text = message
@@ -124,5 +130,23 @@ class Utilities {
                 }
             }
         }
+    }
+    
+    // MARK: - Useful Functions
+    static func calculateAge(birthday: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_GB")
+        
+        let birthdate = dateFormatter.date(from: birthday)!
+        
+        let calendar = Calendar.current
+        
+        let today = Date()
+        
+        let components = calendar.dateComponents([.year], from: birthdate, to: today)
+        
+        return Int(components.year!)
     }
 }
