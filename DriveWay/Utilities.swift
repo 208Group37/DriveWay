@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
-
+import CoreLocation
 
 // Custom class containing methods that will allow us to keep a consistent style throughout the app
 class Utilities {
@@ -148,5 +148,38 @@ class Utilities {
         let components = calendar.dateComponents([.year], from: birthdate, to: today)
         
         return Int(components.year!)
+    }
+    
+    static func distanceBetweenTwoAddresses(learnerAddress: String, instructorAddress: String) -> Int {
+        let geocoder1 = CLGeocoder()
+        let geocoder2 = CLGeocoder()
+        
+        var learnerLocation = CLLocation()
+        var instructorLocation = CLLocation()
+        
+        geocoder1.geocodeAddressString(learnerAddress) { placemark, err in
+            if err != nil {
+                print("There was an error, \(err.debugDescription)")
+            } else {
+                for place in placemark! {
+                    learnerLocation = place.location!
+                    print(learnerLocation)
+                }
+            }
+        }
+        
+        geocoder2.geocodeAddressString(instructorAddress) { placemark, err in
+            if err != nil {
+                print("There was an error, \(err.debugDescription)")
+            } else {
+                for place in placemark! {
+                    instructorLocation = place.location!
+                    print(instructorLocation)
+                }
+            }
+        }
+        
+        let distance = learnerLocation.distance(from: instructorLocation)
+        return Int(distance)
     }
 }

@@ -13,7 +13,8 @@ class LearnerMyInstructorViewController: UIViewController {
 
     // MARK: - Outlets and Variables
     @IBOutlet weak var noInstructorContainerView: UIView!
-    @IBOutlet weak var instructorContainerView: UIView!
+    @IBOutlet weak var carInstructorContainerView: UIView!
+    @IBOutlet weak var motorcycleInstructorContainerView: UIView!
     
     let userAccInfo = Auth.auth().currentUser
     
@@ -44,7 +45,11 @@ class LearnerMyInstructorViewController: UIViewController {
                     let userDocData = document.data()
                     
                     if userDocData["hasInstructor"] as! Bool {
-                        self.instructorContainerView.isHidden = false
+                        if userDocData["vehicle"] as! String == "car"{
+                            self.carInstructorContainerView.isHidden = false
+                        } else {
+                            self.motorcycleInstructorContainerView.isHidden = false
+                        }
                     } else {
                         self.noInstructorContainerView.isHidden = false
                     }
