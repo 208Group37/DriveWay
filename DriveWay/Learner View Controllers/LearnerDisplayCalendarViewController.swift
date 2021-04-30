@@ -181,27 +181,27 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         else if (tableView == lessonDetailTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonDetails", for: indexPath)
             if (lessons != [lesson]()) {
+                print(lessons)
                 for i in 0..<lessons.count {
                     if (lessons[i].date == dates[indexPath.row]) {
                         cell.textLabel?.text = "\(lessons[i].startTime) - \(lessons[i].endTime)"
                         cell.detailTextLabel?.text = "\(lessons[i].duration) hours"
                         cell.backgroundColor = UIColor.white
                         cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 1)!
+                        return cell
                     }
-                    else {
+                    else if (lessons[i].date != dates[indexPath.row] && i == lessons.count-1) {
                         cell.textLabel?.text = ""
                         cell.detailTextLabel?.text = ""
                         cell.backgroundColor = UIColor.lightGray
                         cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 0)!
+                        return cell
                     }
                 }
             }
-            return cell
         }
         // Dummy cell created so that the app won't crash if, for some reason, the correct table view isn't found
-        else {
-            return UITableViewCell()
-        }
+        return UITableViewCell()
     }
     
     
