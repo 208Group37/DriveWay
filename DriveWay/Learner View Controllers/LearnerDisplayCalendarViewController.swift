@@ -7,6 +7,8 @@
 //  This file is responsible for showing the learner their calendar, if they have an instructor.
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,8 +20,19 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var lastWeekButton: UIButton!
     @IBOutlet weak var lastWeekLabel: UILabel!
     @IBOutlet weak var nextWeekLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
+    struct lesson: Equatable {
+        var duration: String
+        var startTime: String
+        var endTime: String
+        var date: String
+    }
+    
+    let userInfo = Auth.auth().currentUser
     var currentWeek = 0
+    
+    var lessons = [lesson]()
     
     @IBAction func nextWeekButton(_ sender: Any) {
         currentWeek += 1
@@ -69,6 +82,27 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         refreshTables()
         
         Utilities.styleButtonNeutral(requestLessonButton)
+        displayFirstName()
+        let database = Firestore.firestore()
+        let collectionReference = database.collection("Lessons")
+        
+        collectionReference.getDocuments { (snapshot, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                for document in snapshot!.documents {
+                    // All the information stored in the document about the user
+                    let userDocData = document.data()
+                    let people = userDocData["people"] as? [String: String]
+                    if (people!["studentID"] == self.userInfo!.uid) {
+                        let times = userDocData["time"] as? [String: String]
+                        let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String)
+                        self.lessons.append(newLesson)
+                    }
+                }
+                self.refreshTables()
+            }
+        }
     }
     
     // MARK: - Custom Functions
@@ -76,14 +110,11 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     func getNextWeekDates(_ week: Int) -> [String] {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "E, d MMM"
+        formatter.dateFormat = "E, d MMM yyyy"
         var dateWeek = [String]()
         
         for i in week*7...week*7+7 {
             dateWeek.append(formatter.string(from: date.addingTimeInterval(TimeInterval(86400*i))))
-        }
-        if (dateWeek[0] == formatter.string(from: date)) {
-            dateWeek[0] = "Today"
         }
         return dateWeek
     }
@@ -105,6 +136,28 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         lastWeekLabel.isHidden = false
     }
     
+    // A function that pulls the user's first name from the database and sets the label in the view controller
+    func displayFirstName() {
+        let database = Firestore.firestore()
+        let collectionReference = database.collection("Students")
+        let query = collectionReference.whereField("userID", isEqualTo: userInfo!.uid)
+        var firstName = ""
+        
+        query.getDocuments { (snapshot, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                for document in snapshot!.documents {
+                    // All the information stored in the document about the user
+                    let userDocData = document.data()
+                    let names = userDocData["name"] as? [String: String]
+                    firstName = names!["first"]!
+                    self.nameLabel?.text = "Hi, \(firstName)"
+                }
+            }
+        }
+    }
+    
     // MARK: - Table View Functions
     
     // Sets the number of rows per section in a table
@@ -114,10 +167,11 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     
     // Defines what values are put in the separate table views
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let dates = getNextWeekDates(currentWeek)
+        print(dates)
         // If the table view is the table that contains the dates
         if (tableView == lessonTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "date", for: indexPath)
-            let dates = getNextWeekDates(currentWeek)
             cell.textLabel?.text = dates[indexPath.row]
             cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 0)!
             return cell
@@ -126,7 +180,22 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         // If the table view is the table that contains lesson information
         else if (tableView == lessonDetailTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonDetails", for: indexPath)
-            cell.textLabel?.text = "Placeholder Lesson Info"
+            if (lessons != [lesson]()) {
+                for i in 0..<lessons.count {
+                    if (lessons[i].date == dates[indexPath.row]) {
+                        cell.textLabel?.text = "\(lessons[i].startTime) - \(lessons[i].endTime)"
+                        cell.detailTextLabel?.text = "\(lessons[i].duration) hours"
+                        cell.backgroundColor = UIColor.white
+                        cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 1)!
+                    }
+                    else {
+                        cell.textLabel?.text = ""
+                        cell.detailTextLabel?.text = ""
+                        cell.backgroundColor = UIColor.lightGray
+                        cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 0)!
+                    }
+                }
+            }
             return cell
         }
         // Dummy cell created so that the app won't crash if, for some reason, the correct table view isn't found

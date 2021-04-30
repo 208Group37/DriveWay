@@ -83,7 +83,7 @@ class Utilities {
     static func styleTableNeutral(_ table:UITableView) {
         table.layer.borderWidth = 2
         table.layer.borderColor = UIColor.black.cgColor
-        table.rowHeight = 75
+        table.rowHeight = 68
     }
     
     // MARK: - Validation Functions

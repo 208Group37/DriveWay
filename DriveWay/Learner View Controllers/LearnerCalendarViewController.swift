@@ -43,7 +43,6 @@ class LearnerCalendarViewController: UIViewController {
                 for document in snapshot!.documents {
                     // All the information stored in the document about the user
                     let userDocData = document.data()
-                    
                     if userDocData["hasInstructor"] as! Bool {
                         self.noInstructorCalendarContainerView.isHidden = true
                     } else {
