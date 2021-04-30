@@ -62,6 +62,7 @@ class LearnerAboutMeEntryViewController: UIViewController {
             // Create a variable for the data to be added to the database
             let dataToAdd: [String : Any] = [
                 "vehicle" : carOrMotorcycle,
+                "lessonCount" : 0,
                 "privateInfo" : [
                     "addresses" : [
                         "homeAddress" : [

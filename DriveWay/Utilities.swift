@@ -30,6 +30,12 @@ class Utilities {
         textView.layer.borderWidth = 3
     }
     
+    static func styleTextViewNonInteractive(_ textView:UITextView) {
+        textView.layer.masksToBounds = true
+        textView.layer.borderColor = UIColor(named: "black")?.cgColor
+        textView.layer.borderWidth = 3
+    }
+    
     // Displaying the error message on a label
     static func showError(_ message:String, errorLabel: UILabel) {
         errorLabel.text = message
@@ -126,6 +132,7 @@ class Utilities {
         }
     }
     
+    // MARK: - Useful Functions
     static func calculateAge(birthday: String) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
