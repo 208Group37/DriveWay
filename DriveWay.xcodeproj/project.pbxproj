@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		478EF618263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF617263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift */; };
+		478EF61A263C6CAE000A37B6 /* LearnerMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */; };
+		478EF61C263C6CF3000A37B6 /* LearnerNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */; };
+		478EF61E263C92C9000A37B6 /* LearnerLessonRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF61D263C92C9000A37B6 /* LearnerLessonRequestViewController.swift */; };
 		6FF6B991AD16B85B35737CD8 /* Pods_DriveWay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE636D4B92674473E5D74755 /* Pods_DriveWay.framework */; };
+		F5F8198D2639E7A5004B67D1 /* InstructorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8198C2639E7A5004B67D1 /* InstructorProfileViewController.swift */; };
 		F81EBF0A26138030003F42DF /* LearnerMoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */; };
 		F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */; };
 		F825EC1D261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F825EC1C261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift */; };
@@ -39,8 +44,13 @@
 
 /* Begin PBXFileReference section */
 		02F6BB666BBA5ED6293A70C6 /* Pods-DriveWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriveWay.debug.xcconfig"; path = "Target Support Files/Pods-DriveWay/Pods-DriveWay.debug.xcconfig"; sourceTree = "<group>"; };
+		478EF617263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerDisplayCalendarViewController.swift; sourceTree = "<group>"; };
+		478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMessagesViewController.swift; sourceTree = "<group>"; };
+		478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerNotificationsViewController.swift; sourceTree = "<group>"; };
+		478EF61D263C92C9000A37B6 /* LearnerLessonRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerLessonRequestViewController.swift; sourceTree = "<group>"; };
 		E84A40593F59A9873A80218C /* Pods-DriveWay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriveWay.release.xcconfig"; path = "Target Support Files/Pods-DriveWay/Pods-DriveWay.release.xcconfig"; sourceTree = "<group>"; };
 		EE636D4B92674473E5D74755 /* Pods_DriveWay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DriveWay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5F8198C2639E7A5004B67D1 /* InstructorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorProfileViewController.swift; sourceTree = "<group>"; };
 		F81EBF0926138030003F42DF /* LearnerMoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMoreDataViewController.swift; sourceTree = "<group>"; };
 		F81EBF0C2613805D003F42DF /* InstructorMoreDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorMoreDataViewController.swift; sourceTree = "<group>"; };
 		F825EC1C261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorPersonalDataEntryViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F85CE60526396FFA0080BE8C /* InstructorHomeScreenViewController.swift */,
+				F5F8198C2639E7A5004B67D1 /* InstructorProfileViewController.swift */,
 			);
 			path = "Instructor View Controllers";
 			sourceTree = "<group>";
@@ -137,6 +148,10 @@
 				F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */,
 				F8580184263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift */,
 				F86B853B263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift */,
+				478EF617263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift */,
+				478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */,
+				478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */,
+				478EF61D263C92C9000A37B6 /* LearnerLessonRequestViewController.swift */,
 			);
 			path = "Learner View Controllers";
 			sourceTree = "<group>";
@@ -339,14 +354,19 @@
 				F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */,
 				F86B853A263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift in Sources */,
 				F843A99A2639EFEE0054DDD4 /* LearnerProfileViewController.swift in Sources */,
+				478EF61E263C92C9000A37B6 /* LearnerLessonRequestViewController.swift in Sources */,
 				F874A613261652600070610E /* LearnerAboutMeEntryViewController.swift in Sources */,
 				F825EC20261E155F0062D24F /* InstructorAvailabilityViewController.swift in Sources */,
 				F8DFEB50261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift in Sources */,
+				478EF61C263C6CF3000A37B6 /* LearnerNotificationsViewController.swift in Sources */,
 				F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */,
 				F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */,
 				F825EC1D261DD9740062D24F /* InstructorPersonalDataEntryViewController.swift in Sources */,
 				F88605AA26113380007E9F99 /* Utilities.swift in Sources */,
+				478EF618263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift in Sources */,
+				F5F8198D2639E7A5004B67D1 /* InstructorProfileViewController.swift in Sources */,
 				F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */,
+				478EF61A263C6CAE000A37B6 /* LearnerMessagesViewController.swift in Sources */,
 				F8A48F562613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
