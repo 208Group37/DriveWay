@@ -23,7 +23,6 @@
 		F85CE60326396B210080BE8C /* LearnerCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85CE60226396B210080BE8C /* LearnerCalendarViewController.swift */; };
 		F85CE60626396FFA0080BE8C /* InstructorHomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85CE60526396FFA0080BE8C /* InstructorHomeScreenViewController.swift */; };
 		F86B853A263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */; };
-		F86B853C263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B853B263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift */; };
 		F87057E926398CB400442495 /* Learner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87057E826398CB400442495 /* Learner.storyboard */; };
 		F87057EC26398CC500442495 /* Instructor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87057EB26398CC500442495 /* Instructor.storyboard */; };
 		F874A613261652600070610E /* LearnerAboutMeEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */; };
@@ -61,7 +60,6 @@
 		F85CE60226396B210080BE8C /* LearnerCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerCalendarViewController.swift; sourceTree = "<group>"; };
 		F85CE60526396FFA0080BE8C /* InstructorHomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorHomeScreenViewController.swift; sourceTree = "<group>"; };
 		F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMyInstructorViewController.swift; sourceTree = "<group>"; };
-		F86B853B263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerHasInstructorViewController.swift; sourceTree = "<group>"; };
 		F87057E826398CB400442495 /* Learner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Learner.storyboard; sourceTree = "<group>"; };
 		F87057EB26398CC500442495 /* Instructor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Instructor.storyboard; sourceTree = "<group>"; };
 		F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerAboutMeEntryViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				F843A9992639EFEE0054DDD4 /* LearnerProfileViewController.swift */,
 				F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */,
 				F8580184263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift */,
-				F86B853B263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift */,
 				478EF617263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift */,
 				478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */,
 				478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */,
@@ -345,7 +342,6 @@
 				F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */,
 				F85CE60326396B210080BE8C /* LearnerCalendarViewController.swift in Sources */,
 				F852399D261201F200B3959D /* PersonalDataEntryViewController.swift in Sources */,
-				F86B853C263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift in Sources */,
 				F8DE32C8260FAF53003B87EF /* LoginScreenViewController.swift in Sources */,
 				F8580185263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift in Sources */,
 				F8DFEB4D261B57AC00841738 /* InstructorAddCarDetailsViewController.swift in Sources */,
