@@ -29,6 +29,7 @@
 		F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */; };
 		F88605AA26113380007E9F99 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88605A926113380007E9F99 /* Utilities.swift */; };
 		F8A48F562613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A48F552613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift */; };
+		F8A50FBF263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A50FBE263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift */; };
 		F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */; };
 		F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C3260FAF53003B87EF /* AppDelegate.swift */; };
 		F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C5260FAF53003B87EF /* SceneDelegate.swift */; };
@@ -66,6 +67,7 @@
 		F88605A5261130A9007E9F99 /* InstructorOrLearnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorOrLearnerViewController.swift; sourceTree = "<group>"; };
 		F88605A926113380007E9F99 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		F8A48F552613B03600A44DC2 /* LearnerSelectAvailabilityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerSelectAvailabilityViewController.swift; sourceTree = "<group>"; };
+		F8A50FBE263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerHasCarInstructorViewController.swift; sourceTree = "<group>"; };
 		F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAndPasswordEntryViewController.swift; sourceTree = "<group>"; };
 		F8DE32C0260FAF53003B87EF /* DriveWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriveWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8DE32C3260FAF53003B87EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */,
 				478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */,
 				478EF61D263C92C9000A37B6 /* LearnerLessonRequestViewController.swift */,
+				F8A50FBE263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift */,
 			);
 			path = "Learner View Controllers";
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				F8580185263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift in Sources */,
 				F8DFEB4D261B57AC00841738 /* InstructorAddCarDetailsViewController.swift in Sources */,
 				F81EBF0A26138030003F42DF /* LearnerMoreDataViewController.swift in Sources */,
+				F8A50FBF263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift in Sources */,
 				F85CE60626396FFA0080BE8C /* InstructorHomeScreenViewController.swift in Sources */,
 				F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */,
 				F86B853A263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift in Sources */,
