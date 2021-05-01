@@ -44,13 +44,11 @@ class LearnerMyInstructorViewController: UIViewController {
                     // All the information stored in the document about the user
                     let userDocData = document.data()
                     
-                    if userDocData["hasInstructor"] as! Bool {
-                        if userDocData["vehicle"] as! String == "car"{
-                            self.carInstructorContainerView.isHidden = false
-                        } else {
-                            self.motorcycleInstructorContainerView.isHidden = false
-                        }
-                    } else {
+                    if userDocData["hasInstructor"] as! Bool && userDocData["vehicle"] as! String == "car" {
+                        self.carInstructorContainerView.isHidden = false
+                        print("Has car instructor")
+                    }
+                    if userDocData["hasInstructor"] as! Bool == false {
                         self.noInstructorContainerView.isHidden = false
                     }
                 }

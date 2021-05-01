@@ -12,7 +12,7 @@ import CoreLocation
 
 class LearnerHasCarInstructorViewController: UIViewController {
 
-    // MARK: - Outlets
+    // MARK: - Outlets and Variables
     @IBOutlet weak var instructorsNameLabel: UILabel!
     @IBOutlet weak var ageGenderLabel: UILabel!
     @IBOutlet weak var reviewAvgLabel: UILabel!
@@ -64,6 +64,7 @@ class LearnerHasCarInstructorViewController: UIViewController {
     
     // MARK: - Data Retrieval
     func getInstructorInformation() {
+        print("Getting insructor info car")
         let database = Firestore.firestore()
         var collectionReference = database.collection("Students")
         var query = collectionReference.whereField("userID", isEqualTo: userAccInfo!.uid)
