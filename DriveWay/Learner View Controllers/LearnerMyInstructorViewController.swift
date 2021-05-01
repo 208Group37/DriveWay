@@ -14,7 +14,6 @@ class LearnerMyInstructorViewController: UIViewController {
     // MARK: - Outlets and Variables
     @IBOutlet weak var noInstructorContainerView: UIView!
     @IBOutlet weak var carInstructorContainerView: UIView!
-    @IBOutlet weak var motorcycleInstructorContainerView: UIView!
     
     let userAccInfo = Auth.auth().currentUser
     
