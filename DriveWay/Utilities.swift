@@ -78,6 +78,14 @@ class Utilities {
         button.layer.borderWidth = 5
     }
     
+    // MARK: - Table View Functions
+    // This function adds a border to a table view
+    static func styleTableNeutral(_ table:UITableView) {
+        table.layer.borderWidth = 2
+        table.layer.borderColor = UIColor.black.cgColor
+        table.rowHeight = 68
+    }
+    
     // MARK: - Validation Functions
     // This function makes sure the password fits within our requirements
     static func validatePassword(_ password:String) -> Bool {
