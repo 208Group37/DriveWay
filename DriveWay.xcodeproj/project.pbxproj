@@ -20,7 +20,6 @@
 		F8580185263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8580184263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift */; };
 		F85CE60326396B210080BE8C /* LearnerCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85CE60226396B210080BE8C /* LearnerCalendarViewController.swift */; };
 		F86B853A263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */; };
-		F86B853C263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B853B263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift */; };
 		F87057E926398CB400442495 /* Learner.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87057E826398CB400442495 /* Learner.storyboard */; };
 		F87057EC26398CC500442495 /* Instructor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87057EB26398CC500442495 /* Instructor.storyboard */; };
 		F874A613261652600070610E /* LearnerAboutMeEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */; };
@@ -55,7 +54,6 @@
 		F8580184263B3EDE0043DE66 /* LearnerNoInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerNoInstructorViewController.swift; sourceTree = "<group>"; };
 		F85CE60226396B210080BE8C /* LearnerCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerCalendarViewController.swift; sourceTree = "<group>"; };
 		F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMyInstructorViewController.swift; sourceTree = "<group>"; };
-		F86B853B263B5AC500CC8AB5 /* LearnerHasInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerHasInstructorViewController.swift; sourceTree = "<group>"; };
 		F87057E826398CB400442495 /* Learner.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Learner.storyboard; sourceTree = "<group>"; };
 		F87057EB26398CC500442495 /* Instructor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Instructor.storyboard; sourceTree = "<group>"; };
 		F874A612261652600070610E /* LearnerAboutMeEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerAboutMeEntryViewController.swift; sourceTree = "<group>"; };

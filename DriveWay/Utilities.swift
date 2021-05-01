@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
-
+import CoreLocation
 
 // Custom class containing methods that will allow us to keep a consistent style throughout the app
 class Utilities {
@@ -76,6 +76,14 @@ class Utilities {
         button.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1)
         button.layer.borderColor = UIColor(named: "black")?.cgColor
         button.layer.borderWidth = 5
+    }
+    
+    // MARK: - Table View Functions
+    // This function adds a border to a table view
+    static func styleTableNeutral(_ table:UITableView) {
+        table.layer.borderWidth = 2
+        table.layer.borderColor = UIColor.black.cgColor
+        table.rowHeight = 68
     }
     
     // MARK: - Validation Functions
@@ -148,5 +156,38 @@ class Utilities {
         let components = calendar.dateComponents([.year], from: birthdate, to: today)
         
         return Int(components.year!)
+    }
+    
+    static func distanceBetweenTwoAddresses(learnerAddress: String, instructorAddress: String) -> Int {
+        let geocoder1 = CLGeocoder()
+        let geocoder2 = CLGeocoder()
+        
+        var learnerLocation = CLLocation()
+        var instructorLocation = CLLocation()
+        
+        geocoder1.geocodeAddressString(learnerAddress) { placemark, err in
+            if err != nil {
+                print("There was an error, \(err.debugDescription)")
+            } else {
+                for place in placemark! {
+                    learnerLocation = place.location!
+                    print(learnerLocation)
+                }
+            }
+        }
+        
+        geocoder2.geocodeAddressString(instructorAddress) { placemark, err in
+            if err != nil {
+                print("There was an error, \(err.debugDescription)")
+            } else {
+                for place in placemark! {
+                    instructorLocation = place.location!
+                    print(instructorLocation)
+                }
+            }
+        }
+        
+        let distance = learnerLocation.distance(from: instructorLocation)
+        return Int(distance)
     }
 }
