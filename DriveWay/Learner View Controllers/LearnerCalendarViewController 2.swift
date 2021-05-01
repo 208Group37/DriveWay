@@ -1,19 +1,25 @@
 //
-//  InstructorHomeScreenViewController.swift
+//  LearnerHomeScreenViewController.swift
 //  DriveWay
 //
 //  Created by Morgan Eckersley on 28/04/2021.
 //
 
 import UIKit
+import FirebaseAuth
 
-class InstructorHomeScreenViewController: UIViewController {
+class LearnerCalendarViewController: UIViewController {
 
+    // MARK: - Variables
+    let userInfo = Auth.auth().currentUser
+    
+    // MARK: - UI Setup
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
     
 
     /*

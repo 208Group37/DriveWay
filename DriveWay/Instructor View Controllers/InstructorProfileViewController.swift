@@ -39,7 +39,7 @@ class InstructorProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        documentRetrieve()
+        infoFill()
         
         
 
@@ -54,7 +54,7 @@ class InstructorProfileViewController: UIViewController {
         return outputString
     }
     
-    func documentRetrieve() {
+    func infoFill() {
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
         let query = collectionReference.whereField("userID", isEqualTo: userInfo!.uid)
@@ -69,6 +69,13 @@ class InstructorProfileViewController: UIViewController {
                     let names = userDocData["name"] as? [String: String]
                     let fullname = names!["first"]! + " " + names!["last"]!
                     self.nameLabel.text = fullname
+                    
+                    let publicInfo = userDocData["publicInfo"] as! [String : String]
+                    // Getting birthdate
+                    let birthday = publicInfo["birthDate"]!
+                    // Calculate age
+                    let age = Utilities.calculateAge(birthday: birthday)
+                    self.ageGenderLabel.text = String(age) + ", " + publicInfo["sex"]!
                     
                     let carInfo = userDocData["car"] as? [String: String]
                     self.CarMakeModelLabel.text = carInfo!["make"]! + " " + carInfo!["model"]!

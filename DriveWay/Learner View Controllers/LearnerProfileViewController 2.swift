@@ -85,8 +85,8 @@ class LearnerProfileViewController: UIViewController {
                     self.vehicleTypeLabel.text = vehicleType?.capitalized
                     
                     // Getting the users postcode from the database
-                    let privateInfo = userDocData["privateInfo"] as? [String : Any]
-                    let addresses = privateInfo!["addresses"] as! [String : Any]
+                    let privateInfo = userDocData["privateInfo"] as! [String : Any]
+                    let addresses = privateInfo["addresses"] as! [String : Any]
                     let homeAddress = addresses["homeAddress"] as! [String : String]
                     let postcode = homeAddress["postcode"]!
                     
