@@ -63,6 +63,8 @@ class LearnerAboutMeEntryViewController: UIViewController {
             let dataToAdd: [String : Any] = [
                 "vehicle" : carOrMotorcycle,
                 "lessonCount" : 0,
+                "hasInstructor" : false,
+                "instructorID" : "",
                 "privateInfo" : [
                     "addresses" : [
                         "homeAddress" : [
@@ -84,6 +86,7 @@ class LearnerAboutMeEntryViewController: UIViewController {
                     "sunday" : [availabilityChoices[6][0], availabilityChoices[6][1], availabilityChoices[6][2]]
                 ]
             ]
+            print(dataToAdd)
             
             // Adding the data to the database
             let user = Auth.auth().currentUser!
