@@ -32,6 +32,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         formatter.dateStyle = .full
         viewingDateString = formatter.string(from: viewingDate)
         viewingDateLabel.text = viewingDateString
+        lessonArray = [lesson]()
         retrieveLessons()
     }
     
@@ -41,6 +42,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         formatter.dateStyle = .full
         viewingDateString = formatter.string(from: viewingDate)
         viewingDateLabel.text = viewingDateString
+        lessonArray = [lesson]()
         retrieveLessons()
     }
     
@@ -123,7 +125,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     func retrieveLessons() {
         let database = Firestore.firestore()
         let collectionReference = database.collection("Lessons")
-        let query = collectionReference.whereField("date", isEqualTo: viewingDate)//.whereField("instructorID", isEqualTo: userInfo!.uid)
+        let query = collectionReference.whereField("date", isEqualTo: viewingDateString)//.whereField("instructorID", isEqualTo: userInfo!.uid)
         
         query.getDocuments { (snapshot, err) in
             if err != nil {
