@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import CoreLocation
+import FirebaseAuth
 
 class InstructorSearchDetailViewController: UIViewController {
 
@@ -40,6 +43,7 @@ class InstructorSearchDetailViewController: UIViewController {
     
     @IBOutlet weak var requestEnrolmentButton: UIButton!
     
+    let userAccInfo = Auth.auth().currentUser
     var instructorID = String()
     
     // MARK: - UI Setup
@@ -47,15 +51,179 @@ class InstructorSearchDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print(instructorID)
         setUpObjects()
     }
     
     func setUpObjects() {
+        getInstructorInformation()
         Utilities.styleTextViewNonInteractive(aboutMeTextView)
         Utilities.styleTextViewNonInteractive(reviewBodyTextView)
         Utilities.styleButtonGreen(requestEnrolmentButton)
     }
+    
+    // MARK: - Data Retrieval
+    func getInstructorInformation() {
+        print("Getting insructor info car")
+        let database = Firestore.firestore()
+        var collectionReference = database.collection("Students")
+        var query = collectionReference.whereField("userID", isEqualTo: userAccInfo!.uid)
+        
+        query.getDocuments { (snapshot, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                for document in snapshot!.documents {
+                    let userDocData = document.data()
+                    // Getting the users address from the database
+                    let privateInfo = userDocData["privateInfo"] as! [String : Any]
+                    let addresses = privateInfo["addresses"] as! [String : Any]
+                    let homeAddress = addresses["homeAddress"] as! [String : String]
+                    
+                    let userAddress = "\(homeAddress["line1"]!), \(homeAddress["line2"]!), \(homeAddress["city"]!)"
+                    
+                    // All the information stored in the document about the instructor
+                    collectionReference = database.collection("Instructors")
+                    query = collectionReference.whereField("userID", isEqualTo: self.instructorID)
+                    
+                    query.getDocuments { snapshot, err in
+                        if err != nil {
+                            print(err.debugDescription)
+                        } else {
+                            for document in snapshot!.documents {
+                                let instructorDocData = document.data()
+                                
+                                // Getting the map of the instructors name and converting it to a dictionary
+                                let names = instructorDocData["name"] as? [String : String]
+                                // Concatonating the names
+                                let fullName = names!["first"]! + " " + names!["last"]!
+                                // Setting the name label to be the instructors name
+                                self.instructorsNameLabel.text = fullName
+                                
+                                // Getting the map of the users public info and converting it to a dictionary
+                                let publicInfo = instructorDocData["publicInfo"] as! [String : String]
+                                // Getting birthdate
+                                let birthday = publicInfo["birthDate"]!
+                                // Calculate age
+                                let age = Utilities.calculateAge(birthday: birthday)
+                                
+                                // Getting the gender of the instructor from the database
+                                let gender = publicInfo["sex"]!
+                                // Adding the age and the gender of the instructor to the correct label
+                                self.ageGenderLabel.text = "\(age), \(gender)"
+                                
+                                // Getting the instructors postcode from the database
+                                let privateInfo = instructorDocData["privateInfo"] as! [String : Any]
+                                let addresses = privateInfo["addresses"] as! [String : Any]
+                                let homeAddress = addresses["homeAddress"] as! [String : String]
+                                let postcode = homeAddress["postcode"]!
+                                // Setting the postcode label to the instructors postcode
+                                self.postcodeLabel.text = postcode
+                                
+                                // Getting the info about the instructors car from the database
+                                let carInfo = instructorDocData["car"] as? [String : String]
+                                // getting the make and model of the car
+                                let makeModelText = carInfo!["make"]! + " " + carInfo!["model"]!
+                                // Setting the text to say the make and model
+                                self.carMakeModelLabel.text = makeModelText
+                                
+                                // Getting the fuel typpe and transmission type from the database and making it a string
+                                let fuelTypeTransmissionText = carInfo!["fuelType"]! + ", " + carInfo!["transmission"]!
+                                // Setting the text label
+                                self.fuelTypeTransmissionLabel.text = fuelTypeTransmissionText
+                                
+                                // Getting lessing info from the database
+                                let lessonInfo = instructorDocData["lesson"] as? [String : Any]
+                                // Getting the price of one instructors lesson
+                                let price = lessonInfo!["price"]! as! String
+                                // Setting the label
+                                self.priceLabel.text = price
+                                
+                                // Getting the instructors crash course value
+                                let crashCourseBool = lessonInfo!["crashCourses"] as! Bool
+                                // Changing true or false to yes or no
+                                if crashCourseBool {
+                                    // Presenting the label
+                                    self.crashCourseLabel.text = "Yes"
+                                } else {
+                                    // Presenting the label
+                                    self.crashCourseLabel.text = "No"
+                                }
+                                
+                                let instructorAddress = "\(homeAddress["line1"]!), \(homeAddress["line2"]!), \(homeAddress["city"]!)"
+                                
+                                let geocoder1 = CLGeocoder()
+                                let geocoder2 = CLGeocoder()
+                                
+                                var userLocation = CLLocation()
+                                var instructorLocation = CLLocation()
+                                
+                                geocoder1.geocodeAddressString(userAddress) { placemark, err in
+                                    if err != nil {
+                                        print("There was an error, \(err.debugDescription)")
+                                    } else {
+                                        for place in placemark! {
+                                            userLocation = place.location!
+                                            geocoder2.geocodeAddressString(instructorAddress) { placemark, err in
+                                                if err != nil {
+                                                    print("There was an error, \(err.debugDescription)")
+                                                } else {
+                                                    for place in placemark! {
+                                                        instructorLocation = place.location!
+                                                        print(instructorLocation)
+                                                        let CLdistance = userLocation.distance(from: instructorLocation)
+                                                        
+                                                        
+                                                        let distance = Float(CLdistance/1600).rounded(.up)
+                                                        
+                                                        self.distanceLabel.text =  String(Int(distance)) + " Miles"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                self.lessonCountLabel.text = "0"
+                                
+                                let availability = instructorDocData["availability"] as! [String : [String]]
+                                for day in availability {
+                                    var labelText = String()
+                                    if day.value.count != 0 {
+                                        for i in day.value {
+                                            labelText = labelText + i
+                                        }
+                                    }
+                                    
+                                    switch day.key {
+                                    case "monday":
+                                        self.mondayTimesLabel.text = labelText
+                                    case "tuesday":
+                                        self.tuesdayTimesLabel.text = labelText
+                                    case "wednesday":
+                                        self.wednesdayTimesLabel.text = labelText
+                                    case "thursday":
+                                        self.thursdayTimesLabel.text = labelText
+                                    case "friday":
+                                        self.fridayTimesLabel.text = labelText
+                                    case "saturday":
+                                        self.saturdayTimesLabel.text = labelText
+                                    case "sunday":
+                                        self.sundayTimesLabel.text = labelText
+                                    default:
+                                        print("Doesnt work")
+                                    }
+                                }
+                                
+                                let instructorAboutMeText = instructorDocData["aboutMe"] as! String
+                                self.aboutMeTextView.text = instructorAboutMeText
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     /*
     // MARK: - Navigation
 
