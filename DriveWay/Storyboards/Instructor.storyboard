@@ -235,6 +235,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1P-gR-G4d">
+                                                <rect key="frame" x="226" y="8" width="159" height="120"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -253,13 +257,13 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="aqV-Fl-bCI"/>
                             </scrollView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="abR-SQ-18V">
-                                <rect key="frame" x="154" y="103" width="154" height="47"/>
+                                <rect key="frame" x="151" y="103" width="154" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age, Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-ZA-QWh">
-                                <rect key="frame" x="152" y="156" width="133" height="28"/>
+                                <rect key="frame" x="152" y="156" width="133" height="25.333333333333343"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
@@ -272,8 +276,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3mu-NJ-a97">
+                                <rect key="frame" x="16" y="77" width="127" height="127.00000000000001"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130.33000000000001" id="Blt-4f-BuI"/>
+                                    <constraint firstAttribute="width" constant="127" id="I6V-rW-PAb"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuO-oe-LG6">
-                                <rect key="frame" x="259" y="115" width="115" height="22"/>
+                                <rect key="frame" x="266" y="75" width="108" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit Profile" image="square.and.pencil" catalog="system">
                                     <color key="titleColor" name="AccentColor"/>
@@ -283,6 +294,8 @@
                         <viewLayoutGuide key="safeArea" id="ac3-Qt-5je"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="3mu-NJ-a97" firstAttribute="top" secondItem="ac3-Qt-5je" secondAttribute="top" constant="31" id="JVp-I5-Xee"/>
+                            <constraint firstItem="3mu-NJ-a97" firstAttribute="leading" secondItem="ac3-Qt-5je" secondAttribute="leading" constant="16" id="MNL-X6-jBO"/>
                             <constraint firstItem="Ewr-Ff-O0R" firstAttribute="bottom" secondItem="ac3-Qt-5je" secondAttribute="bottom" id="T50-Dj-Kbd"/>
                             <constraint firstItem="Ewr-Ff-O0R" firstAttribute="trailing" secondItem="ac3-Qt-5je" secondAttribute="trailing" id="fxl-EY-UFg"/>
                             <constraint firstItem="Ewr-Ff-O0R" firstAttribute="top" secondItem="ac3-Qt-5je" secondAttribute="top" constant="169" id="g5s-Uv-FTT"/>
@@ -398,6 +411,9 @@
                                 <state key="normal" image="arrow.left" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="29"/>
                                 </state>
+                                <connections>
+                                    <action selector="previousDayButton:" destination="nyg-jO-ECh" eventType="touchUpInside" id="roh-r4-Op3"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Previous Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCD-Jd-XLM">
                                 <rect key="frame" x="16" y="733" width="90" height="18"/>
@@ -413,11 +429,21 @@
                                 <state key="normal" image="arrow.right" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="29"/>
                                 </state>
+                                <connections>
+                                    <action selector="nextDayButton:" destination="nyg-jO-ECh" eventType="touchUpInside" id="pRt-3y-TA4"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7o-KN-Er8">
                                 <rect key="frame" x="310" y="733" width="63" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Viewing Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMl-Lz-lrJ">
+                                <rect key="frame" x="97" y="702" width="196" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -429,9 +455,8 @@
                     <navigationItem key="navigationItem" id="Yfh-af-0xI"/>
                     <connections>
                         <outlet property="greetingLabel" destination="oin-N4-krd" id="BLN-um-wAe"/>
-                        <outlet property="nextDayButton" destination="iBJ-Ut-eD5" id="6S4-bT-i4K"/>
-                        <outlet property="previousDayButton" destination="aMm-IH-KF0" id="pfg-fn-20F"/>
                         <outlet property="timeTableView" destination="90l-uq-viQ" id="O0f-vF-iQS"/>
+                        <outlet property="viewingDateLabel" destination="PMl-Lz-lrJ" id="g5k-k6-t7L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ytu-e8-QGt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -445,6 +470,7 @@
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="person.crop.rectangle" catalog="system" width="128" height="93"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

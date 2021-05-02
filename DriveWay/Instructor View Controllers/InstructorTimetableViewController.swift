@@ -25,11 +25,29 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var timeTableView: UITableView!
-    @IBOutlet weak var previousDayButton: UIButton!
-    @IBOutlet weak var nextDayButton: UIButton!
+    @IBOutlet weak var viewingDateLabel: UILabel!
+    @IBAction func previousDayButton(_ sender: Any) {
+        viewingDate = Calendar.current.date(byAdding: .day, value: -1, to: viewingDate)!
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        viewingDateString = formatter.string(from: viewingDate)
+        viewingDateLabel.text = viewingDateString
+        retrieveLessons()
+    }
+    
+    @IBAction func nextDayButton(_ sender: Any) {
+        viewingDate = Calendar.current.date(byAdding: .day, value: 1, to: viewingDate)!
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        viewingDateString = formatter.string(from: viewingDate)
+        viewingDateLabel.text = viewingDateString
+        retrieveLessons()
+    }
+    
     
     let userInfo = Auth.auth().currentUser
-    var viewingDate = ""
+    var viewingDate = Date()
+    var viewingDateString = ""
     var lessonArray = [lesson]()
     var instructorName = ""
     
@@ -74,8 +92,8 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         
         let formatter = DateFormatter()
         formatter.dateStyle = .full
-        let dateString = formatter.string(from: Date())
-        viewingDate = dateString
+        viewingDateString = formatter.string(from: Date())
+        viewingDateLabel.text = viewingDateString
         
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
@@ -122,9 +140,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                 print(self.lessonArray)
                 let timeFormatter = DateFormatter()
                 timeFormatter.dateFormat = "hh:mm"
-                self.lessonArray.sort(by: {
-                    (timeFormatter.date(from: $0.startTime))?.compare(timeFormatter.date(from: $1.startTime)!) == .orderedDescending
-                })
+                //self.lessonArray.sort(by: { (timeFormatter.date(from: $0.startTime))?.compare(timeFormatter.date(from: $1.startTime)!) == .orderedDescending })
                 print(self.lessonArray)
                 self.timeTableView.reloadData()
             }
