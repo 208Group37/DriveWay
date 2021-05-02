@@ -25,6 +25,8 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var timeTableView: UITableView!
+    @IBOutlet weak var previousDayButton: UIButton!
+    @IBOutlet weak var nextDayButton: UIButton!
     
     let userInfo = Auth.auth().currentUser
     var viewingDate = ""
@@ -94,38 +96,16 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         let newLesson = lesson(duration: "2", startTime: "18:00", endTime: "19:00", date: "Sunday, May 2, 2021", startLocation: testStart, endLocation: testEnd, instructorId: "lx8GcYCUE8M7QDSjRrJrBsorJwp2", studentId: "mHhitRpSyZUVuooVE4982IP11Z83")
         self.lessonArray.append(newLesson)
         retrieveLessons()
-        lessonArray.sort(by: {
-            ($0.startTime as? Date)! > ($1.startTime as? Date)!
-        })
 
         // Do any additional setup after loading the view.
         
-    }
-    
-    func retrieveName(databaseChoice: String ,id : String) -> String {
-        var name = ""
-        let database = Firestore.firestore()
-        let collectionReference = database.collection(databaseChoice)
-        let query = collectionReference.whereField("userID", isEqualTo: id)
-        
-        query.getDocuments { (snapshot, err) in
-            if err != nil {
-                print("There was an error, \(err.debugDescription)")
-            } else {
-                for document in snapshot!.documents {
-                    let nameData = document.data()["name"] as? [String: String]
-                    name = name + nameData!["first"]! + " " + nameData!["last"]!
-                }
-            }
-        }
-        return name
     }
 
     // MARK: - Load lessons
     func retrieveLessons() {
         let database = Firestore.firestore()
         let collectionReference = database.collection("Lessons")
-        let query = collectionReference.whereField("date", isEqualTo: viewingDate)//.whereField("instructor", isEqualTo: userInfo!.uid)
+        let query = collectionReference.whereField("date", isEqualTo: viewingDate)//.whereField("instructorID", isEqualTo: userInfo!.uid)
         
         query.getDocuments { (snapshot, err) in
             if err != nil {
@@ -139,6 +119,12 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                     let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!)
                     self.lessonArray.append(newLesson)
                 }
+                print(self.lessonArray)
+                let timeFormatter = DateFormatter()
+                timeFormatter.dateFormat = "hh:mm"
+                self.lessonArray.sort(by: {
+                    (timeFormatter.date(from: $0.startTime))?.compare(timeFormatter.date(from: $1.startTime)!) == .orderedDescending
+                })
                 print(self.lessonArray)
                 self.timeTableView.reloadData()
             }

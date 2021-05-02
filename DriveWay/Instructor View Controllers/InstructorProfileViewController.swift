@@ -32,6 +32,7 @@ class InstructorProfileViewController: UIViewController {
     @IBOutlet weak var sundayTimesLabel: UILabel!
     @IBOutlet weak var aboutMeBox: UITextField!
     
+    
     //get the info of the user, such as their userid which is useful for getting their data from the database
     let userInfo = Auth.auth().currentUser
     //var userDocInfo = [QueryDocumentSnapshot]()
@@ -39,7 +40,7 @@ class InstructorProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        documentRetrieve()
+        getAndFillInfo()
         
         // Do any additional setup after loading the view.
     }
@@ -47,14 +48,14 @@ class InstructorProfileViewController: UIViewController {
     func convertArrayToString(array : [String]) -> String {
         var outputString = ""
         for item in array {
-            outputString = outputString + ", " + item
+            outputString = outputString + " " + item
         }
         return outputString
     }
     
     // MARK: - Get info and display
     //This function queries the database for the data about the user for putting into their profile, then puts the information into all of the labels on the profile
-    func documentRetrieve() {
+    func getAndFillInfo() {
         //set up the query
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
@@ -73,6 +74,13 @@ class InstructorProfileViewController: UIViewController {
                     let names = userDocData["name"] as? [String: String]
                     let fullname = names!["first"]! + " " + names!["last"]!
                     self.nameLabel.text = fullname
+                    
+                    let publicInfo = userDocData["publicInfo"] as! [String : String]
+                    // Getting birthdate
+                    let birthday = publicInfo["birthDate"]!
+                    // Calculate age
+                    let age = Utilities.calculateAge(birthday: birthday)
+                    self.ageGenderLabel.text = String(age) + ", " + publicInfo["sex"]!
                     //get the car information and display it
                     let carInfo = userDocData["car"] as? [String: String]
                     self.CarMakeModelLabel.text = carInfo!["make"]! + " " + carInfo!["model"]!
