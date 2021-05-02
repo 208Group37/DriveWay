@@ -10,12 +10,11 @@ import FirebaseFirestore
 import FirebaseAuth
 import CoreLocation
 
-class SearchForInstructorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
+class SearchForInstructorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     // MARK: - Outlets and Variables
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    
+    @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var filterButton: UIButton!
     
@@ -51,6 +50,7 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
     
     func setUpObjects() {
         getInstructorInformation()
+        self.searchBar.delegate = self
     }
     
     // MARK: Table View Functions
@@ -171,6 +171,26 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
         return sortedArray
     }
     
+    // MARK: - Search Functions
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchBar.resignFirstResponder()
+        searchForInstructor(name: searchBar.text ?? "")
+        return true
+    }
+    
+    func searchForInstructor(name: String) {
+        var searchResults = [instructorResult]()
+        for instructor in instructorResults {
+            if name.lowercased() == instructor.name.lowercased() {
+                searchResults.append(instructor)
+            }
+        }
+        instructorResults = searchResults
+        refreshTable()
+    }
+    
+    
     // MARK: - Data Retrieval
     func getInstructorInformation() {
         print("Getting insructor info car")
@@ -254,9 +274,8 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
                                                             let distance = String(Float(CLdistance/1600).rounded(.up))
                                                             
                                                             
-                                                            
                                                             let instructor = instructorResult(name: fullName, gender: gender, age: age, transmission: transmission, price: price , distanceAway: distance, operatingRange: operatingRange)
-                                                            
+                                                        
                                                             self.instructorResults.append(instructor)
                                                             
                                                             self.refreshTable()

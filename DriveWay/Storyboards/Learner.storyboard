@@ -369,14 +369,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="619"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search for an instructor" translatesAutoresizingMaskIntoConstraints="NO" id="hAD-rn-ZWl">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="51"/>
-                                <textInputTraits key="textInputTraits" textContentType="name"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ls-Ka-roB">
                                 <rect key="frame" x="15.999999999999996" y="59" width="61.666666666666657" height="22"/>
                                 <constraints>
@@ -471,28 +463,37 @@
                                     <outlet property="delegate" destination="X3A-PR-Qks" id="OvR-dK-AjG"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search For An Instructors Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AzQ-kA-UEc">
+                                <rect key="frame" x="16" y="10" width="358" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="358" id="7C8-LR-Dlg"/>
+                                    <constraint firstAttribute="height" constant="34" id="jDj-9w-C3f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xnr-M2-JAu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hAD-rn-ZWl" firstAttribute="trailing" secondItem="xnr-M2-JAu" secondAttribute="trailing" id="2HW-AF-QGE"/>
-                            <constraint firstItem="hAD-rn-ZWl" firstAttribute="top" secondItem="xnr-M2-JAu" secondAttribute="top" id="7XQ-Hk-35R"/>
+                            <constraint firstItem="xnr-M2-JAu" firstAttribute="trailing" secondItem="AzQ-kA-UEc" secondAttribute="trailing" constant="16" id="5ie-my-qnp"/>
+                            <constraint firstItem="6Za-Bu-Qqs" firstAttribute="leading" secondItem="jCT-5g-MU1" secondAttribute="leading" id="EAX-aC-hJg"/>
                             <constraint firstItem="xnr-M2-JAu" firstAttribute="trailing" secondItem="08d-as-Isf" secondAttribute="trailing" constant="16" id="GKs-mE-w70"/>
                             <constraint firstItem="6Za-Bu-Qqs" firstAttribute="top" secondItem="5Ls-Ka-roB" secondAttribute="bottom" constant="8" symbolic="YES" id="Hhw-fp-G91"/>
                             <constraint firstItem="5Ls-Ka-roB" firstAttribute="leading" secondItem="xnr-M2-JAu" secondAttribute="leading" constant="16" id="INC-fp-Gdp"/>
-                            <constraint firstItem="6Za-Bu-Qqs" firstAttribute="leading" secondItem="hAD-rn-ZWl" secondAttribute="leading" id="QYb-57-8MK"/>
+                            <constraint firstItem="5Ls-Ka-roB" firstAttribute="baseline" secondItem="08d-as-Isf" secondAttribute="baseline" id="Jhi-5g-MUW"/>
+                            <constraint firstItem="6Za-Bu-Qqs" firstAttribute="centerX" secondItem="AzQ-kA-UEc" secondAttribute="centerX" id="LqB-UG-ebt"/>
+                            <constraint firstItem="5Ls-Ka-roB" firstAttribute="top" secondItem="AzQ-kA-UEc" secondAttribute="bottom" constant="15" id="MRt-gg-ZCw"/>
                             <constraint firstItem="6Za-Bu-Qqs" firstAttribute="bottom" secondItem="xnr-M2-JAu" secondAttribute="bottom" id="XXJ-0i-mNH"/>
-                            <constraint firstItem="hAD-rn-ZWl" firstAttribute="leading" secondItem="xnr-M2-JAu" secondAttribute="leading" id="Z3X-B3-0u5"/>
-                            <constraint firstItem="5Ls-Ka-roB" firstAttribute="top" secondItem="hAD-rn-ZWl" secondAttribute="bottom" constant="8" id="a3Z-tG-5FL"/>
-                            <constraint firstItem="6Za-Bu-Qqs" firstAttribute="trailing" secondItem="hAD-rn-ZWl" secondAttribute="trailing" id="h5T-N5-cAk"/>
-                            <constraint firstItem="08d-as-Isf" firstAttribute="top" secondItem="hAD-rn-ZWl" secondAttribute="bottom" constant="8" id="olZ-7n-Ule"/>
+                            <constraint firstItem="AzQ-kA-UEc" firstAttribute="leading" secondItem="xnr-M2-JAu" secondAttribute="leading" constant="16" id="aJy-gY-BuJ"/>
+                            <constraint firstItem="AzQ-kA-UEc" firstAttribute="top" secondItem="xnr-M2-JAu" secondAttribute="top" constant="10" id="eFq-m1-PVi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="arS-Rx-ykn"/>
                     <connections>
                         <outlet property="filterButton" destination="08d-as-Isf" id="u6j-kb-KT6"/>
                         <outlet property="resultsTable" destination="6Za-Bu-Qqs" id="UbS-1a-5hU"/>
-                        <outlet property="searchBar" destination="hAD-rn-ZWl" id="FKT-gr-qdN"/>
+                        <outlet property="searchBar" destination="AzQ-kA-UEc" id="BG6-gg-YnO"/>
                         <outlet property="sortButton" destination="5Ls-Ka-roB" id="j0B-Vo-SLd"/>
                     </connections>
                 </viewController>
