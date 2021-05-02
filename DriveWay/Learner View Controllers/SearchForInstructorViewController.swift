@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import CoreLocation
 
-class SearchForInstructorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchForInstructorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
 
     // MARK: - Outlets and Variables
     
@@ -23,10 +23,16 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
     
     let userAccInfo = Auth.auth().currentUser
     
+    var sortPicker = UIPickerView()
+    var toolBar = UIToolbar()
+    let sortOptions = ["Price ASC", "Price DEC", "Age ASC", "Age DEC", "Distance Away ASC", "Distance Away DEC"]
+    var selectedSort: String = "Price ASC"
+    
     // MARK: - Struct For Instructor Search Result
     struct instructorResult {
         var name: String
         var gender: String
+        var age: Int
         var transmission: String
         var price: String
         var distanceAway: String
@@ -40,8 +46,12 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setUpObjects()
+    }
+    
+    func setUpObjects() {
         getInstructorInformation()
-    }    
+    }
     
     // MARK: Table View Functions
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,9 +59,9 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
         
         let instructor = instructorResults[indexPath.row]
         print(instructor)
-        cell.instructorNameGenderLabel.text = instructor.name + ", " + instructor.gender
+        cell.instructorNameGenderLabel.text = instructor.name + ", " + instructor.gender + ", " + String(instructor.age)
         cell.transmissionLabel.text = instructor.transmission
-        cell.priceLabel.text = String(instructor.price)
+        cell.priceLabel.text = "£" + String(instructor.price) + "/hr, " + instructor.distanceAway + " Miles Away"
         
         return cell
     }
@@ -62,6 +72,103 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
     
     func refreshTable() {
         resultsTable.reloadData()
+    }
+    
+    // MARK: - Button Functions
+    
+    
+    @IBAction func sortButtonPressed(_ sender: Any) {
+        sortPicker = UIPickerView.init()
+        sortPicker.delegate = self
+        sortPicker.dataSource = self
+        sortPicker.backgroundColor = UIColor.white
+        sortPicker.setValue(UIColor.black, forKey: "textColor")
+        sortPicker.autoresizingMask = .flexibleWidth
+        sortPicker.contentMode = .center
+        sortPicker.frame = CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 300)
+        self.view.addSubview(sortPicker)
+                
+        toolBar = UIToolbar.init(frame: CGRect.init(x: 0.0, y: UIScreen.main.bounds.size.height - 300, width: UIScreen.main.bounds.size.width, height: 50))
+        toolBar.items = [UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(sortSelected))]
+        self.view.addSubview(toolBar)
+    }
+    
+    // MARK: Filter and Sort Funstions
+    
+    // Compulsary functions for the picker view
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sortOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sortOptions[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedSort = sortOptions[row]
+    }
+
+    // When done is pressed set the text field to be what the user chose
+    @objc func sortSelected() {
+        print(selectedSort)
+        if selectedSort == "Price ASC" {
+            instructorResults = sortPriceASC(listOfInstructors: instructorResults)
+            refreshTable()
+        }
+        if selectedSort == "Price DEC" {
+            instructorResults = sortPriceASC(listOfInstructors: instructorResults)
+            instructorResults.reverse()
+            refreshTable()
+        }
+        if selectedSort == "Age ASC" {
+            instructorResults = sortAgeASC(listOfInstructors: instructorResults)
+            refreshTable()
+        }
+        if selectedSort == "Age DEC" {
+            instructorResults = sortAgeASC(listOfInstructors: instructorResults)
+            instructorResults.reverse()
+            refreshTable()
+        }
+        if selectedSort == "Distance Away ASC" {
+            instructorResults = sortDistanceAwayASC(listOfInstructors: instructorResults)
+            refreshTable()
+        }
+        if selectedSort == "Distance Away DEC" {
+            instructorResults = sortDistanceAwayASC(listOfInstructors: instructorResults)
+            instructorResults.reverse()
+            refreshTable()
+        }
+        sortPicker.removeFromSuperview()
+        toolBar.removeFromSuperview()
+    }
+    
+    // MARK: - Sorting Functions
+    func sortPriceASC(listOfInstructors: [instructorResult]) -> [instructorResult] {
+        let sortedArray = listOfInstructors.sorted { (lhs: instructorResult, rhs: instructorResult) -> Bool in
+            // you can have additional code here
+            return lhs.price < rhs.price
+        }
+        return sortedArray
+    }
+    
+    func sortAgeASC(listOfInstructors: [instructorResult]) -> [instructorResult] {
+        let sortedArray = listOfInstructors.sorted { (lhs: instructorResult, rhs: instructorResult) -> Bool in
+            // you can have additional code here
+            return lhs.age < rhs.age
+        }
+        return sortedArray
+    }
+    
+    func sortDistanceAwayASC(listOfInstructors: [instructorResult]) -> [instructorResult] {
+        let sortedArray = listOfInstructors.sorted { (lhs: instructorResult, rhs: instructorResult) -> Bool in
+            // you can have additional code here
+            return lhs.distanceAway < rhs.distanceAway
+        }
+        return sortedArray
     }
     
     // MARK: - Data Retrieval
@@ -85,6 +192,10 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
                         
                         let publicInfo = instructorDocData["publicInfo"] as! [String : String]
                         let gender = publicInfo["sex"]!
+                        
+                        let birthday = publicInfo["birthDate"]!
+                        
+                        let age = Utilities.calculateAge(birthday: birthday)
                         
                         let carInfo = instructorDocData["car"] as! [String : String]
                         let transmission = carInfo["transmission"]!
@@ -144,7 +255,7 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
                                                             
                                                             
                                                             
-                                                            let instructor = instructorResult(name: fullName, gender: gender, transmission: transmission, price: price , distanceAway: distance, operatingRange: operatingRange)
+                                                            let instructor = instructorResult(name: fullName, gender: gender, age: age, transmission: transmission, price: price , distanceAway: distance, operatingRange: operatingRange)
                                                             
                                                             self.instructorResults.append(instructor)
                                                             

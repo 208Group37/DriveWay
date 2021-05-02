@@ -385,6 +385,9 @@
                                 <state key="normal" title="Sort" image="arrow.up.arrow.down" catalog="system">
                                     <color key="titleColor" name="AccentColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="sortButtonPressed:" destination="X3A-PR-Qks" eventType="touchUpInside" id="3D2-XH-TMg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08d-as-Isf">
                                 <rect key="frame" x="310" y="59" width="64" height="22"/>
