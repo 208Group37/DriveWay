@@ -38,11 +38,11 @@ class LearnerProfileViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setUpObjects()
-        getUserInformation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationItem.hidesBackButton = true
+        getUserInformation()
     }
     
     func setUpObjects() {

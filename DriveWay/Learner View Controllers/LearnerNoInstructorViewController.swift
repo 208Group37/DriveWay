@@ -26,7 +26,10 @@ class LearnerNoInstructorViewController: UIViewController {
         Utilities.styleButtonNeutral(searchForInstructorButton)
     }
 
-    /*
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "toSearchForInstructor", sender: nil)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -34,6 +37,5 @@ class LearnerNoInstructorViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }

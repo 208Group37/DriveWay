@@ -10,6 +10,14 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
+// Define specific colours for use in the cells
+extension UIColor {
+    static let driveWayRed = UIColor(red: 0.9412, green: 0.4078, blue: 0.4118, alpha: 1) /* #f06869 */
+    static let driveWayYellow = UIColor(red: 0.9961, green: 0.8902, blue: 0.5686, alpha: 1) /* #fee391 */
+    static let driveWayGreen = UIColor(red: 0.5059, green: 0.8392, blue: 0.3333, alpha: 1) /* #81d655 */
+    static let driveWayBlue = UIColor(red: 0.102, green: 0.651, blue: 0.9255, alpha: 1) /* #1aa6ec */
+}
+
 class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: - Variable Declaration
@@ -27,13 +35,21 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         var startTime: String
         var endTime: String
         var date: String
+        var status: String
+        var studentID: String
+        var instructorID: String
+        var notes: String
     }
     
     let userInfo = Auth.auth().currentUser
     var currentWeek = 0
+    var selectedLesson = 0
+    var firstName = ""
+    var instructorName = ""
     
     var lessons = [lesson]()
     
+    // MARK: - Button actions
     @IBAction func nextWeekButton(_ sender: Any) {
         currentWeek += 1
         if (currentWeek == 1) {
@@ -80,9 +96,9 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         lessonTableView.bounces = false
         lessonDetailTableView.bounces = false
         refreshTables()
+        displayFirstName()
         
         Utilities.styleButtonNeutral(requestLessonButton)
-        displayFirstName()
         let database = Firestore.firestore()
         let collectionReference = database.collection("Lessons")
         
@@ -96,7 +112,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
                     let people = userDocData["people"] as? [String: String]
                     if (people!["studentID"] == self.userInfo!.uid) {
                         let times = userDocData["time"] as? [String: String]
-                        let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String)
+                        let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String, status: userDocData["status"] as! String, studentID: people!["studentID"]!, instructorID: people!["instructorID"]!, notes: userDocData["notes"] as! String)
                         self.lessons.append(newLesson)
                     }
                 }
@@ -105,12 +121,25 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailViewController = segue.destination as? LearnerLessonDetailViewController {
+            detailViewController.date = lessons[selectedLesson].date
+            detailViewController.time = " \(lessons[selectedLesson].startTime) - \(lessons[selectedLesson].endTime)"
+            detailViewController.studentName = firstName
+            detailViewController.instructorName = instructorName
+            detailViewController.pickup = ""
+            detailViewController.dropoff = ""
+            detailViewController.notes = lessons[selectedLesson].notes
+            detailViewController.status = lessons[selectedLesson].status
+        }
+    }
+    
     // MARK: - Custom Functions
     // A function that gets the current week of dates
     func getNextWeekDates(_ week: Int) -> [String] {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateStyle = .full
+        formatter.dateFormat = "EEEE, MMM d, yyyy"
         var dateWeek = [String]()
         
         for i in week*7...week*7+7 {
@@ -153,8 +182,25 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
                     let names = userDocData["name"] as? [String: String]
                     firstName = names!["first"]!
                     self.nameLabel?.text = "Hi, \(firstName)"
+                    self.firstName = firstName
                 }
             }
+        }
+    }
+    
+    // Sets the colour of a cell, given the status of the lesson
+    func changeCellColour(cell: UITableViewCell, lessonStatus: String) {
+        switch lessonStatus {
+        case "Accepted":
+            cell.backgroundColor = UIColor.driveWayGreen
+        case "Pending":
+            cell.backgroundColor = UIColor.driveWayYellow
+        case "Cancelled":
+            cell.backgroundColor = UIColor.driveWayRed
+        case "Done":
+            cell.backgroundColor = UIColor.driveWayBlue
+        default:
+            cell.backgroundColor = UIColor.white
         }
     }
     
@@ -168,7 +214,6 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     // Defines what values are put in the separate table views
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dates = getNextWeekDates(currentWeek)
-        print(dates)
         // If the table view is the table that contains the dates
         if (tableView == lessonTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "date", for: indexPath)
@@ -181,12 +226,11 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         else if (tableView == lessonDetailTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "lessonDetails", for: indexPath)
             if (lessons != [lesson]()) {
-                print(lessons)
                 for i in 0..<lessons.count {
                     if (lessons[i].date == dates[indexPath.row]) {
-                        cell.textLabel?.text = "\(lessons[i].startTime) - \(lessons[i].endTime)"
+                        cell.textLabel?.text = "\(lessons[i].startTime) - \(lessons[i].endTime) (\(lessons[i].status))"
                         cell.detailTextLabel?.text = "\(lessons[i].duration) hours"
-                        cell.backgroundColor = UIColor.white
+                        changeCellColour(cell: cell, lessonStatus: lessons[i].status)
                         cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 1)!
                         return cell
                     }
@@ -202,6 +246,33 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         }
         // Dummy cell created so that the app won't crash if, for some reason, the correct table view isn't found
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let dates = getNextWeekDates(currentWeek)
+        for i in 0..<lessons.count {
+            if (lessons[i].date == dates[indexPath.row]) {
+                selectedLesson = i
+            }
+        }
+        let database = Firestore.firestore()
+        let collectionReference = database.collection("Instructors")
+        let query = collectionReference.whereField("userID", isEqualTo: lessons[indexPath.row].instructorID)
+        print(lessons[indexPath.row].instructorID)
+        query.getDocuments { (snapshot, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                for document in snapshot!.documents {
+                    // All the information stored in the document about the user
+                    let userDocData = document.data()
+                    let name = userDocData["name"] as? [String: String]
+                    self.instructorName = "\(name!["first"]!) \(name!["last"]!)"
+                    self.performSegue(withIdentifier: "toLessonDetailSegue", sender: nil)
+                }
+            }
+        }
     }
     
     
