@@ -404,6 +404,7 @@
                     <navigationItem key="navigationItem" id="Yfh-af-0xI"/>
                     <connections>
                         <outlet property="greetingLabel" destination="oin-N4-krd" id="BLN-um-wAe"/>
+                        <outlet property="timeTableView" destination="90l-uq-viQ" id="O0f-vF-iQS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ytu-e8-QGt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

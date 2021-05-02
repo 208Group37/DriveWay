@@ -110,7 +110,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     func getNextWeekDates(_ week: Int) -> [String] {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "E, d MMM yyyy"
+        formatter.dateStyle = .full
         var dateWeek = [String]()
         
         for i in week*7...week*7+7 {
