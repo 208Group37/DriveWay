@@ -49,6 +49,7 @@ class Utilities {
         button.layer.masksToBounds = true
         button.layer.borderColor = UIColor(named: "black")?.cgColor
         button.layer.borderWidth = 5
+        button.layer.backgroundColor = UIColor.white.cgColor
     }
     
     // This function stylizes the buttons to be black and green

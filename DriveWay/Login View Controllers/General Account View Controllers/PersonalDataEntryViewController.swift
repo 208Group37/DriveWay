@@ -61,6 +61,12 @@ class PersonalDataEntryViewController: UIViewController, UIPickerViewDelegate, U
         datePicker.preferredDatePickerStyle = UIDatePickerStyle.wheels
         datePicker.datePickerMode = .date
         datePicker.locale = Locale.init(identifier: "en_GB")
+        if accountType == "Instructors" {
+            datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -21, to: Date())
+        }
+        else {
+            datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -17, to: Date())
+        }
         // Creating the toolbar that will hold the done button
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
