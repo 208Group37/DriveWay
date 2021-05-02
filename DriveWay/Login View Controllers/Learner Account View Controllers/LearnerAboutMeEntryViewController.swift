@@ -63,6 +63,8 @@ class LearnerAboutMeEntryViewController: UIViewController {
             let dataToAdd: [String : Any] = [
                 "vehicle" : carOrMotorcycle,
                 "lessonCount" : 0,
+                "hasInstructor" : false,
+                "instructorID" : "",
                 "privateInfo" : [
                     "addresses" : [
                         "homeAddress" : [

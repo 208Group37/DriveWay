@@ -41,6 +41,7 @@
 		F8DE32D0260FAF53003B87EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8DE32CE260FAF53003B87EF /* LaunchScreen.storyboard */; };
 		F8DFEB4D261B57AC00841738 /* InstructorAddCarDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DFEB4C261B57AC00841738 /* InstructorAddCarDetailsViewController.swift */; };
 		F8DFEB50261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DFEB4F261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift */; };
+		F8E4D591263EDC3600556415 /* InstructorSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D590263EDC3600556415 /* InstructorSearchDetailViewController.swift */; };
 		F8F85A842611F57C00FDFFD3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8F85A832611F57C00FDFFD3 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		F8DE32D1260FAF53003B87EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8DFEB4C261B57AC00841738 /* InstructorAddCarDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorAddCarDetailsViewController.swift; sourceTree = "<group>"; };
 		F8DFEB4F261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorAddMotorcycleDetailsViewController.swift; sourceTree = "<group>"; };
+		F8E4D590263EDC3600556415 /* InstructorSearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorSearchDetailViewController.swift; sourceTree = "<group>"; };
 		F8F85A832611F57C00FDFFD3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +160,7 @@
 				478EF61D263C92C9000A37B6 /* LearnerLessonRequestViewController.swift */,
 				F8A50FBE263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift */,
 				F8C6EFFF263DD0EC0025536E /* SearchForInstructorViewController.swift */,
+				F8E4D590263EDC3600556415 /* InstructorSearchDetailViewController.swift */,
 			);
 			path = "Learner View Controllers";
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				F8DFEB50261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift in Sources */,
 				F5EE5FF4263DC6B9003526B1 /* InstructorTimetableViewController.swift in Sources */,
 				478EF61C263C6CF3000A37B6 /* LearnerNotificationsViewController.swift in Sources */,
+				F8E4D591263EDC3600556415 /* InstructorSearchDetailViewController.swift in Sources */,
 				F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */,
 				F8C6F000263DD0EC0025536E /* SearchForInstructorViewController.swift in Sources */,
 				F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */,
