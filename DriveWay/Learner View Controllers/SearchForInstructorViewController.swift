@@ -318,6 +318,7 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
 
 }
 
+// MARK: - Custom Search Result Table View Cell
 class searchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var instructorNameGenderLabel: UILabel!
     @IBOutlet weak var transmissionLabel: UILabel!

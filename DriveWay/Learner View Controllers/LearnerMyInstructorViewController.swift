@@ -23,12 +23,12 @@ class LearnerMyInstructorViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setUpObjects()
     }
     
-    func setUpObjects() {
+    override func viewDidAppear(_ animated: Bool) {
         doesUserHaveInstructor()
     }
+    
     
     
     func doesUserHaveInstructor() {
