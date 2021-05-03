@@ -35,6 +35,8 @@
 		F8A50FBF263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A50FBE263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift */; };
 		F8C6F000263DD0EC0025536E /* SearchForInstructorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C6EFFF263DD0EC0025536E /* SearchForInstructorViewController.swift */; };
 		F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */; };
+		F8DC6A4B264029AB0087F013 /* InstructorMyStudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DC6A4A264029AB0087F013 /* InstructorMyStudentsViewController.swift */; };
+		F8DC6A4D264038700087F013 /* InstructorMyStudentsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DC6A4C264038700087F013 /* InstructorMyStudentsDetailsViewController.swift */; };
 		F8DE32C4260FAF53003B87EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C3260FAF53003B87EF /* AppDelegate.swift */; };
 		F8DE32C6260FAF53003B87EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C5260FAF53003B87EF /* SceneDelegate.swift */; };
 		F8DE32C8260FAF53003B87EF /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DE32C7260FAF53003B87EF /* LoginScreenViewController.swift */; };
@@ -78,6 +80,8 @@
 		F8A50FBE263DBA7000AB9880 /* LearnerHasCarInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerHasCarInstructorViewController.swift; sourceTree = "<group>"; };
 		F8C6EFFF263DD0EC0025536E /* SearchForInstructorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchForInstructorViewController.swift; sourceTree = "<group>"; };
 		F8D1599026122C69000C249F /* EmailAndPasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAndPasswordEntryViewController.swift; sourceTree = "<group>"; };
+		F8DC6A4A264029AB0087F013 /* InstructorMyStudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorMyStudentsViewController.swift; sourceTree = "<group>"; };
+		F8DC6A4C264038700087F013 /* InstructorMyStudentsDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructorMyStudentsDetailsViewController.swift; sourceTree = "<group>"; };
 		F8DE32C0260FAF53003B87EF /* DriveWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DriveWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8DE32C3260FAF53003B87EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8DE32C5260FAF53003B87EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 				F5F8198C2639E7A5004B67D1 /* InstructorProfileViewController.swift */,
 				F5EE5FF2263DC6B9003526B1 /* InstructorTimetableViewController.swift */,
 				F5EE5FF3263DC6B9003526B1 /* timetableViewCell.swift */,
+				F8DC6A4A264029AB0087F013 /* InstructorMyStudentsViewController.swift */,
+				F8DC6A4C264038700087F013 /* InstructorMyStudentsDetailsViewController.swift */,
 				F5EE5FF6263F408A003526B1 /* InstructorLessonDetailViewController.swift */,
 			);
 			path = "Instructor View Controllers";
@@ -369,6 +375,7 @@
 				F8D1599126122C69000C249F /* EmailAndPasswordEntryViewController.swift in Sources */,
 				F5EE5FF5263DC6B9003526B1 /* timetableViewCell.swift in Sources */,
 				F86B853A263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift in Sources */,
+				F8DC6A4D264038700087F013 /* InstructorMyStudentsDetailsViewController.swift in Sources */,
 				F843A99A2639EFEE0054DDD4 /* LearnerProfileViewController.swift in Sources */,
 				478EF61E263C92C9000A37B6 /* LearnerLessonRequestViewController.swift in Sources */,
 				F5EE5FF7263F408A003526B1 /* InstructorLessonDetailViewController.swift in Sources */,
@@ -376,6 +383,7 @@
 				F825EC20261E155F0062D24F /* InstructorAvailabilityViewController.swift in Sources */,
 				F8DFEB50261B587100841738 /* InstructorAddMotorcycleDetailsViewController.swift in Sources */,
 				F5EE5FF4263DC6B9003526B1 /* InstructorTimetableViewController.swift in Sources */,
+				F8DC6A4B264029AB0087F013 /* InstructorMyStudentsViewController.swift in Sources */,
 				478EF61C263C6CF3000A37B6 /* LearnerNotificationsViewController.swift in Sources */,
 				F8E4D591263EDC3600556415 /* InstructorSearchDetailViewController.swift in Sources */,
 				F81EBF0D2613805D003F42DF /* InstructorMoreDataViewController.swift in Sources */,

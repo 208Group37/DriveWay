@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class LearnerLessonDetailViewController: UIViewController {
     
@@ -18,6 +20,7 @@ class LearnerLessonDetailViewController: UIViewController {
     var dropoff: String = ""
     var notes: String = ""
     var status: String = ""
+    var documentID = ""
     
     // MARK: - Outlets
     @IBOutlet weak var dateTimeBackgroundView: UIView!
@@ -31,6 +34,23 @@ class LearnerLessonDetailViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    // MARK: - Button actions
+    @IBAction func cancelButton(_ sender: Any) {
+        let database = Firestore.firestore()
+        database.collection("Lessons").document(documentID).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+                let failure = UIAlertController(title: "Cancellation failed", message: "Try again", preferredStyle: .alert)
+                failure.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(failure, animated: true, completion: nil)
+            } else {
+                print("Document successfully removed!")
+                let success = UIAlertController(title: "Cancelled successfully", message: "Your lesson has been cancelled", preferredStyle: .alert)
+                success.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                self.present(success, animated: true, completion: nil)
+            }
+        }
+    }
     
     // MARK: - Built-in Functions
     override func viewDidLoad() {
@@ -42,6 +62,8 @@ class LearnerLessonDetailViewController: UIViewController {
         timeLabel.text = time
         instructorLabel.text = "Instructor: \(instructorName)"
         statusLabel.text = "Status: \(status)"
+        pickupLabel.text = "Pick-up: \(pickup)"
+        dropoffLabel.text = "Drop-off: \(dropoff)"
         notesTextView.text = notes
         notesTextView.isEditable = false
         changeView(view: dateTimeBackgroundView, button: cancelButton, status: status)
