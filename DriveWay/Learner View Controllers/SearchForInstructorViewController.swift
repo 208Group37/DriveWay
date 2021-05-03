@@ -27,6 +27,8 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
     let sortOptions = ["Price ASC", "Price DEC", "Age ASC", "Age DEC", "Distance Away ASC", "Distance Away DEC"]
     var selectedSort: String = "Price ASC"
     
+    var instructorIndex = Int()
+    
     // MARK: - Struct For Instructor Search Result
     struct instructorResult {
         var name: String
@@ -36,6 +38,7 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
         var price: String
         var distanceAway: String
         var operatingRange: Int
+        var id: String
     }
     
     var instructorResults = [instructorResult]()
@@ -68,6 +71,11 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return instructorResults.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        instructorIndex = indexPath.row
+        performSegue(withIdentifier: "showInstructorDetail", sender: self)
     }
     
     func refreshTable() {
@@ -232,6 +240,7 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
                         
                         let instructorAddress = "\(homeAddress["line1"]!), \(homeAddress["line2"]!), \(homeAddress["city"]!)"
                         
+                        let instructorID = instructorDocData["userID"] as! String
                         
                         let collectionReference = database.collection("Students")
                         let query = collectionReference.whereField("userID", isEqualTo: self.userAccInfo!.uid)
@@ -274,7 +283,7 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
                                                             let distance = String(Float(CLdistance/1600).rounded(.up))
                                                             
                                                             
-                                                            let instructor = instructorResult(name: fullName, gender: gender, age: age, transmission: transmission, price: price , distanceAway: distance, operatingRange: operatingRange)
+                                                            let instructor = instructorResult(name: fullName, gender: gender, age: age, transmission: transmission, price: price , distanceAway: distance, operatingRange: operatingRange,id: instructorID)
                                                         
                                                             self.instructorResults.append(instructor)
                                                             
@@ -294,15 +303,18 @@ class SearchForInstructorViewController: UIViewController, UITableViewDelegate, 
         }
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        let segueName = segue.identifier
+        if segueName == "showInstructorDetail" {
+            let destination = segue.destination as! InstructorSearchDetailViewController
+            destination.instructorID = instructorResults[instructorIndex].id
+        }
     }
-    */
 
 }
 

@@ -31,6 +31,8 @@ class LearnerLessonDetailViewController: UIViewController {
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var cancelButton: UIButton!
     
+    
+    // MARK: - Built-in Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,12 +49,21 @@ class LearnerLessonDetailViewController: UIViewController {
         cancelButton.layer.borderWidth = 1
     }
     
+    
+    // MARK: - Custom functions
+    // A function that changes the look of the screen depending on the status of the lesson
     func changeView(view: UIView, button: UIButton, status: String) {
         switch status {
         case "Accepted":
             view.backgroundColor = UIColor.driveWayGreen
+            notesTextView.textColor = UIColor.darkGray
+            notesTextView.text = "You've not had this lesson yet, so there are no notes."
+            notesTextView.font = UIFont.italicSystemFont(ofSize: 14)
         case "Pending":
             view.backgroundColor = UIColor.driveWayYellow
+            notesTextView.textColor = UIColor.darkGray
+            notesTextView.text = "You've not had this lesson yet, so there are no notes."
+            notesTextView.font = UIFont.italicSystemFont(ofSize: 14)
         case "Cancelled":
             view.backgroundColor = UIColor.driveWayRed
             button.isHidden = true

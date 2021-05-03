@@ -121,6 +121,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         }
     }
     
+    // What to do when a segue happens
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailViewController = segue.destination as? LearnerLessonDetailViewController {
             detailViewController.date = lessons[selectedLesson].date
@@ -258,8 +259,8 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         }
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
-        let query = collectionReference.whereField("userID", isEqualTo: lessons[indexPath.row].instructorID)
-        print(lessons[indexPath.row].instructorID)
+        let query = collectionReference.whereField("userID", isEqualTo: lessons[selectedLesson].instructorID)
+        print(lessons[selectedLesson].instructorID)
         query.getDocuments { (snapshot, err) in
             if err != nil {
                 print(err.debugDescription)
