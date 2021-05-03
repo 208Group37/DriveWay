@@ -61,6 +61,52 @@ class InstructorSearchDetailViewController: UIViewController {
         Utilities.styleButtonGreen(requestEnrolmentButton)
     }
     
+    // MARK: - Button Functions
+    
+    @IBAction func requestEnrolmentButtonPressed(_ sender: Any) {
+        let database = Firestore.firestore()
+        var collectionReference = database.collection("Students")
+        var query = collectionReference.whereField("userID", isEqualTo: userAccInfo!.uid)
+        
+        var dataToAdd = ["hasInstructor" : true,
+                                     "instructorID" : self.instructorID] as [String : Any]
+                    
+        Utilities.addDataToUserDocument(self.userAccInfo! , collection: "Students", dataToAdd: dataToAdd)
+        
+        collectionReference = database.collection("Instructors")
+        query = collectionReference.whereField("userID", isEqualTo: self.instructorID)
+        // Getting the documents that forfill the query
+        query.getDocuments() { (snapshot, err) in
+            // If there is an error
+            if err != nil {
+                // Print the error and a message
+                print("There was an error obtaining the documentID: \(err!)")
+            // Otherwise
+            } else {
+                // For every document in the snapshot
+                for document in snapshot!.documents {
+                    let instructorDocData = document.data()
+                    var students = instructorDocData["students"] as! [String]
+                    students.append(self.userAccInfo!.uid)
+                    dataToAdd = ["students" : students]
+                    // Add the data to the document
+                    let documentReference = collectionReference.document(document.documentID)
+                    documentReference.setData(dataToAdd, merge: true)
+                }
+            }
+        }
+        
+        
+        
+        
+        requestEnrolmentButton.isEnabled = false
+        requestEnrolmentButton.backgroundColor = .lightGray
+        
+        let alertController = UIAlertController(title: "Enrolled", message: "You have enrolled with this instructor", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default))
+        self.present(alertController, animated: true,completion: nil)
+    }
+    
     // MARK: - Data Retrieval
     func getInstructorInformation() {
         print("Getting insructor info car")

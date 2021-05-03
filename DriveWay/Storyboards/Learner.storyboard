@@ -837,6 +837,9 @@
                                                 <state key="normal" title="Request Enrolment">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="requestEnrolmentButtonPressed:" destination="h4L-6H-Q3X" eventType="touchUpInside" id="Dt3-A5-pUS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
