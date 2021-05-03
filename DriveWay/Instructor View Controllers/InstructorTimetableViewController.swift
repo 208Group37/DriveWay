@@ -67,6 +67,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! timetableViewCell
         let lesson = lessonArray[indexPath.row]
+        //let pickupName = Utilities.convertGeoPointToPlaceName(geoPoint: lesson.startLocation)
         
         let database = Firestore.firestore()
         let collectionReference = database.collection("Students")
@@ -79,7 +80,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                 for document in snapshot!.documents {
                     let nameData = document.data()["name"] as? [String: String]
                     let name = nameData!["first"]! + " " + nameData!["last"]!
-                    cell.lessonDetailField.text = name + " at " + "placeholder"
+                    //cell.lessonDetailField.text = name + " at " + pickupName
                 }
             }
         }
@@ -117,7 +118,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                 }
             }
         }
-        let testStart = GeoPoint(latitude: 1.0, longitude: 0.1)
+        let testStart = GeoPoint(latitude: 53.38988075156031, longitude: -2.96630859375)
         let testEnd = GeoPoint(latitude: 30.2, longitude: 12.1)
         let newLesson = lesson(duration: "2", startTime: "18:00", endTime: "19:00", date: "Sunday, May 2, 2021", startLocation: testStart, endLocation: testEnd, instructorId: "lx8GcYCUE8M7QDSjRrJrBsorJwp2", studentId: "mHhitRpSyZUVuooVE4982IP11Z83", status: "Done", notes: "Some notes")
         self.lessonArray.append(newLesson)
@@ -145,11 +146,11 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                     let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!, status: userDocData["status"] as! String, notes: userDocData["notes"] as! String)
                     self.lessonArray.append(newLesson)
                 }
-                print(self.lessonArray)
+                //print(self.lessonArray)
                 let timeFormatter = DateFormatter()
                 timeFormatter.dateFormat = "hh:mm"
                 //self.lessonArray.sort(by: { (timeFormatter.date(from: $0.startTime))?.compare(timeFormatter.date(from: $1.startTime)!) == .orderedDescending })
-                print(self.lessonArray)
+                //print(self.lessonArray)
                 self.timeTableView.reloadData()
             }
         }
@@ -188,8 +189,8 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
             detailViewController.date = viewingDateString
             detailViewController.time = " \(lessonArray[selectedLesson].startTime) - \(lessonArray[selectedLesson].endTime)"
             detailViewController.studentName = selectedStudentName
-            detailViewController.pickup = ""
-            detailViewController.dropoff = ""
+            detailViewController.pickup = lessonArray[selectedLesson].startLocation
+            detailViewController.dropoff = lessonArray[selectedLesson].endLocation
             detailViewController.notes = lessonArray[selectedLesson].notes
             detailViewController.status = lessonArray[selectedLesson].status
         }

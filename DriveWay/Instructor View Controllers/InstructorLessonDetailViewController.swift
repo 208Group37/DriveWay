@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import CoreLocation
+import FirebaseFirestore
+import FirebaseAuth
 
 class InstructorLessonDetailViewController: UIViewController {
 
@@ -13,8 +16,8 @@ class InstructorLessonDetailViewController: UIViewController {
     var date: String = ""
     var time: String = ""
     var studentName: String = ""
-    var pickup: String = ""
-    var dropoff: String = ""
+    var pickup = GeoPoint(latitude: 0.0, longitude: 0.0)
+    var dropoff = GeoPoint(latitude: 0.0, longitude: 0.0)
     var notes: String = ""
     var status: String = ""
     
@@ -39,6 +42,44 @@ class InstructorLessonDetailViewController: UIViewController {
         statusLabel.text = "Status: \(status)"
         notesTextView.text = notes
         notesTextView.isEditable = false
+        let firstLocation = CLLocation(latitude: pickup.latitude, longitude: pickup.longitude)
+        var pickupName = ""
+        CLGeocoder().reverseGeocodeLocation(firstLocation, completionHandler: { (placemarks, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                if let placemark = placemarks?[0] {
+                    if placemark.subThoroughfare != nil {
+                        pickupName += placemark.subThoroughfare! + " "
+                    }
+                    if placemark.thoroughfare != nil {
+                        pickupName += placemark.thoroughfare!
+                        pickupName += ", " + placemark.locality!
+                    }
+                    self.pickupLabel.text = "Pickup: " + pickupName
+                }
+            }
+        }
+        )
+        let secondLocation = CLLocation(latitude: pickup.latitude, longitude: pickup.longitude)
+        var dropoffName = ""
+        CLGeocoder().reverseGeocodeLocation(secondLocation, completionHandler: { (placemarks, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                if let placemark = placemarks?[0] {
+                    if placemark.subThoroughfare != nil {
+                        dropoffName += placemark.subThoroughfare! + " "
+                    }
+                    if placemark.thoroughfare != nil {
+                        dropoffName += placemark.thoroughfare!
+                        dropoffName += ", " + placemark.locality!
+                    }
+                    self.dropoffLabel.text = "Dropoff: \(dropoffName)"
+                }
+            }
+        }
+        )
         changeView(view: dateTimeBackgroundView, button: cancelButton, status: status)
         Utilities.styleButtonNeutral(cancelButton)
         cancelButton.layer.borderWidth = 1

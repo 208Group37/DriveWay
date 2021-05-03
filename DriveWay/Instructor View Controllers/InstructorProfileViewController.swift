@@ -30,7 +30,7 @@ class InstructorProfileViewController: UIViewController {
     @IBOutlet weak var fridayTimesLabel: UILabel!
     @IBOutlet weak var saturdayTimesLabel: UILabel!
     @IBOutlet weak var sundayTimesLabel: UILabel!
-    @IBOutlet weak var aboutMeBox: UITextField!
+    @IBOutlet weak var aboutMeBox: UITextView!
     
     
     //get the info of the user, such as their userid which is useful for getting their data from the database
@@ -39,9 +39,8 @@ class InstructorProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Utilities.styleTextViewNonInteractive(aboutMeBox)
         getAndFillInfo()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -105,7 +104,7 @@ class InstructorProfileViewController: UIViewController {
                     self.fridayTimesLabel.text = self.convertArrayToString(array: times!["friday"] ?? [])
                     self.saturdayTimesLabel.text = self.convertArrayToString(array: times!["saturday"] ?? [])
                     self.sundayTimesLabel.text = self.convertArrayToString(array: times!["sunday"] ?? [])
-                    
+                    self.aboutMeBox.text = userDocData["aboutMe"] as! String
                     
                 }
             }
