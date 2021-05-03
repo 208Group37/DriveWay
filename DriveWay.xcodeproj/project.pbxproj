@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		474AC4382640174700361392 /* LearnerLessonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474AC4372640174700361392 /* LearnerLessonDetailViewController.swift */; };
 		478EF618263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF617263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift */; };
 		478EF61A263C6CAE000A37B6 /* LearnerMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */; };
 		478EF61C263C6CF3000A37B6 /* LearnerNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		02F6BB666BBA5ED6293A70C6 /* Pods-DriveWay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriveWay.debug.xcconfig"; path = "Target Support Files/Pods-DriveWay/Pods-DriveWay.debug.xcconfig"; sourceTree = "<group>"; };
+		474AC4372640174700361392 /* LearnerLessonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnerLessonDetailViewController.swift; sourceTree = "<group>"; };
 		478EF617263C1F22000A37B6 /* LearnerDisplayCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerDisplayCalendarViewController.swift; sourceTree = "<group>"; };
 		478EF619263C6CAE000A37B6 /* LearnerMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerMessagesViewController.swift; sourceTree = "<group>"; };
 		478EF61B263C6CF3000A37B6 /* LearnerNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnerNotificationsViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		F85CE609263978B90080BE8C /* Learner View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				474AC4372640174700361392 /* LearnerLessonDetailViewController.swift */,
 				F85CE60226396B210080BE8C /* LearnerCalendarViewController.swift */,
 				F843A9992639EFEE0054DDD4 /* LearnerProfileViewController.swift */,
 				F86B8539263B591B00CC8AB5 /* LearnerMyInstructorViewController.swift */,
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88605A6261130A9007E9F99 /* InstructorOrLearnerViewController.swift in Sources */,
+				474AC4382640174700361392 /* LearnerLessonDetailViewController.swift in Sources */,
 				F85CE60326396B210080BE8C /* LearnerCalendarViewController.swift in Sources */,
 				F852399D261201F200B3959D /* PersonalDataEntryViewController.swift in Sources */,
 				F8DE32C8260FAF53003B87EF /* LoginScreenViewController.swift in Sources */,
