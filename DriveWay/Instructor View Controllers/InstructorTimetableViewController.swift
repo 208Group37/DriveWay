@@ -18,12 +18,13 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         var startTime: String
         var endTime: String
         var date: String
-        var startLocation: GeoPoint
-        var endLocation: GeoPoint
+        var startLocation: String
+        var endLocation: String
         var instructorId: String
         var studentId: String
         var status: String
         var notes: String
+        var lessonId: String
     }
     
     //Label outlets
@@ -31,6 +32,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     @IBOutlet weak var timeTableView: UITableView!
     @IBOutlet weak var viewingDateLabel: UILabel!
     
+    // MARK: - Button actions
     //These are the actions for the buttons that change the day that the user is looking at. Each of them changes the date by one day (forward or backward), clears the array that holds the lessons for the day being viewed, then calls the function to retrieve the lessons for the day that has been changed to
     @IBAction func previousDayButton(_ sender: Any) {
         viewingDate = Calendar.current.date(byAdding: .day, value: -1, to: viewingDate)!
@@ -86,7 +88,11 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                 for document in snapshot!.documents {
                     let nameData = document.data()["name"] as? [String: String]
                     let name = nameData!["first"]! + " " + nameData!["last"]!
-                    cell.lessonDetailField.text = name
+                    if lesson.status == "Pending" {
+                        cell.lessonDetailField.text = name + " - Request Pending"
+                    } else {
+                        cell.lessonDetailField.text = name
+                    }
                 }
             }
         }
@@ -94,9 +100,8 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         cell.timeField.text = lesson.startTime + " - " + lesson.endTime
         return cell
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewDidAppear(_ animated: Bool) {
         //get today's date and format it into a string
         let formatter = DateFormatter()
         formatter.locale = Locale.init(identifier: "en_GB")
@@ -109,7 +114,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
         let query = collectionReference.whereField("userID", isEqualTo: userInfo?.uid)
-        
+        //This is just for getting the name for the greeting label
         query.getDocuments { (snapshot, err) in
             if err != nil {
                 print("There was an error, \(err.debugDescription)")
@@ -121,21 +126,24 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                 }
             }
         }
-        //TEST LESSON - REMEMBER TO REMOVE
-        let testStart = GeoPoint(latitude: 53.38988075156031, longitude: -2.96630859375)
-        let testEnd = GeoPoint(latitude: 30.2, longitude: 12.1)
-        let newLesson = lesson(duration: "2", startTime: "18:00", endTime: "19:00", date: "Sunday, May 2 2021", startLocation: testStart, endLocation: testEnd, instructorId: "lx8GcYCUE8M7QDSjRrJrBsorJwp2", studentId: "mHhitRpSyZUVuooVE4982IP11Z83", status: "Done", notes: "Some notes")
-        self.lessonArray.append(newLesson)
-        //Retrieve the lessons for the day
+        //clear the timetable then get the lessons, with any updates if they have been made
+        lessonArray = []
         retrieveLessons()
+    }
+
+    //All set up is done in the viewDidAppear as that will do it each time the screen is viewed
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
     }
     
+    // MARK: - Lesson sorting functions
+    //This function is to make the comparison of times in the sortLessons function more convienient
     func parseTimeForComparison(timeString: String) -> Int {
         let componentArray = timeString.components(separatedBy: ":")
-        var comparisonNumb = Int(componentArray[0]) ?? 0 * 60 + Int(componentArray[1])!
+        let comparisonNumb = Int(componentArray[0]) ?? 0 * 60 + Int(componentArray[1])!
         return comparisonNumb
     }
     
@@ -162,7 +170,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         let database = Firestore.firestore()
         let collectionReference = database.collection("Lessons")
         //They have to be on the day being viewed and for the instructor/user
-        let query = collectionReference.whereField("date", isEqualTo: viewingDateString) //.whereField("instructorID", isEqualTo: userInfo!.uid as! String)
+        let query = collectionReference.whereField("date", isEqualTo: viewingDateString)//.whereField("instructorID", isEqualTo: userInfo!.uid as! String)
         
         query.getDocuments { (snapshot, err) in
             if err != nil {
@@ -173,9 +181,9 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                     let userDocData = document.data()
                     //some of the data has to be split into dictionaries because in the database they're mapped and so can't be accessed otherwise
                     let times = userDocData["time"] as? [String: String]
-                    let locations = userDocData["location"] as? [String: GeoPoint]
+                    let locations = userDocData["location"] as? [String: String]
                     let people = userDocData["people"] as? [String: String]
-                    let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!, status: userDocData["status"] as! String, notes: userDocData["notes"] as! String)
+                    let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!, status: userDocData["status"] as! String, notes: userDocData["notes"] as! String, lessonId: document.documentID)
                     //store this object in the lesson array
                     self.lessonArray.append(newLesson)
                 }
@@ -187,11 +195,8 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         }
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    */
+    // MARK: - Navigation
     
     //If a lesson in the table has been tapped on, it should take the user to a detail view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -209,6 +214,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
             detailViewController.dropoff = lessonArray[selectedLesson].endLocation
             detailViewController.notes = lessonArray[selectedLesson].notes
             detailViewController.status = lessonArray[selectedLesson].status
+            detailViewController.lessonId = lessonArray[selectedLesson].lessonId
         }
     }
 

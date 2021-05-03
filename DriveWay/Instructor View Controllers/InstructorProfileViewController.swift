@@ -20,7 +20,6 @@ class InstructorProfileViewController: UIViewController {
     @IBOutlet weak var fuelAndTransmissionLabel: UILabel!
     @IBOutlet weak var registrationLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var lessonLengthLabel: UILabel!
     @IBOutlet weak var crashCourseLabel: UILabel!
     @IBOutlet weak var lessonCountLabel: UILabel!
     @IBOutlet weak var mondayTimesLabel: UILabel!
@@ -87,7 +86,7 @@ class InstructorProfileViewController: UIViewController {
                     self.registrationLabel.text = carInfo!["numberPlate"]
                     //get the information about their lessons and display it
                     let lessonInfo = userDocData["lesson"] as? [String: Any]
-                    self.priceLabel.text = lessonInfo!["price"] as? String
+                    self.priceLabel.text = "£" + ((lessonInfo!["price"] as? String)!) + "/hr"
                     var crashCourseString: String
                     if lessonInfo!["crashCourses"] as! Bool == true {
                         crashCourseString = "Yes"
