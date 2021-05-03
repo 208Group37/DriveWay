@@ -13,6 +13,7 @@
         <scene sceneID="eQH-dM-Hxt">
             <objects>
                 <tabBarController id="bB1-pn-RWv" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uVp-kS-N3m"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Img-vm-iPN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -292,9 +293,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-Hl-jTd">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-Hl-jTd">
                                 <rect key="frame" x="117" y="700" width="157" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="157" id="cbv-mw-2Yg"/>
+                                    <constraint firstAttribute="height" constant="56" id="v5J-vV-c8A"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Drop Student">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,6 +328,7 @@
                             <constraint firstItem="LBk-mo-8IM" firstAttribute="trailing" secondItem="3Iw-NI-Awu" secondAttribute="trailing" id="HIm-O0-gWe"/>
                             <constraint firstItem="jWu-hc-orC" firstAttribute="trailing" secondItem="LBk-mo-8IM" secondAttribute="trailing" id="HzL-Mt-xQp"/>
                             <constraint firstItem="dKa-uB-11M" firstAttribute="trailing" secondItem="Cl7-ED-okz" secondAttribute="trailing" id="L2e-hS-vFI"/>
+                            <constraint firstItem="BIo-dN-aan" firstAttribute="trailing" secondItem="Dg7-Hl-jTd" secondAttribute="trailing" constant="116" id="L5d-rp-M4C"/>
                             <constraint firstItem="sPO-vr-KR4" firstAttribute="leading" secondItem="Cl7-ED-okz" secondAttribute="leading" id="LMp-oO-ifX"/>
                             <constraint firstItem="PcF-0W-GCx" firstAttribute="trailing" secondItem="vs1-gC-jl4" secondAttribute="trailing" id="La8-sC-B3u"/>
                             <constraint firstItem="k7U-m4-q09" firstAttribute="top" secondItem="I8M-od-Baq" secondAttribute="bottom" id="MfH-SS-One"/>
@@ -332,6 +337,7 @@
                             <constraint firstItem="vHF-0n-3gi" firstAttribute="leading" secondItem="iDq-fJ-nZV" secondAttribute="leading" id="MwL-U9-vyW"/>
                             <constraint firstItem="cUX-Y4-WS8" firstAttribute="trailing" secondItem="R3z-k0-6W8" secondAttribute="trailing" id="NnJ-tL-w1N"/>
                             <constraint firstItem="j44-2L-KyQ" firstAttribute="leading" secondItem="bz3-vB-Uca" secondAttribute="leading" id="Q8L-zO-kJG"/>
+                            <constraint firstItem="Dg7-Hl-jTd" firstAttribute="leading" secondItem="BIo-dN-aan" secondAttribute="leading" constant="117" id="QRb-6f-fed"/>
                             <constraint firstItem="dKa-uB-11M" firstAttribute="top" secondItem="zQb-QB-6MS" secondAttribute="bottom" id="QUT-cb-FVZ"/>
                             <constraint firstItem="3Iw-NI-Awu" firstAttribute="leading" secondItem="nIc-p4-nPn" secondAttribute="trailing" constant="19" id="Rex-RW-MCE"/>
                             <constraint firstItem="Cl7-ED-okz" firstAttribute="leading" secondItem="BM1-Pu-aMc" secondAttribute="leading" id="Rt6-jy-KeB"/>
@@ -354,6 +360,7 @@
                             <constraint firstItem="da7-4h-iSf" firstAttribute="top" secondItem="R3z-k0-6W8" secondAttribute="bottom" constant="12" id="cO7-RJ-oQ3"/>
                             <constraint firstItem="dKa-uB-11M" firstAttribute="baseline" secondItem="LBk-mo-8IM" secondAttribute="baseline" id="cdZ-ZI-l0a"/>
                             <constraint firstItem="Cl7-ED-okz" firstAttribute="top" secondItem="sPO-vr-KR4" secondAttribute="bottom" constant="8" symbolic="YES" id="dIk-k0-gks"/>
+                            <constraint firstItem="Dg7-Hl-jTd" firstAttribute="top" secondItem="BM1-Pu-aMc" secondAttribute="bottom" constant="8" symbolic="YES" id="dZj-bM-WH5"/>
                             <constraint firstItem="cUX-Y4-WS8" firstAttribute="leading" secondItem="R3z-k0-6W8" secondAttribute="leading" id="eMT-jf-7Dd"/>
                             <constraint firstItem="R3z-k0-6W8" firstAttribute="top" secondItem="cUX-Y4-WS8" secondAttribute="bottom" constant="8" symbolic="YES" id="eu0-2o-5dP"/>
                             <constraint firstItem="nIc-p4-nPn" firstAttribute="leading" secondItem="PcF-0W-GCx" secondAttribute="leading" id="ewp-Wm-xND"/>
@@ -388,6 +395,7 @@
                             <constraint firstItem="j44-2L-KyQ" firstAttribute="baseline" secondItem="Kf3-a9-HXe" secondAttribute="baseline" id="uwE-bH-4GR"/>
                             <constraint firstItem="1Bb-rL-kKM" firstAttribute="top" secondItem="4yd-Gg-zGB" secondAttribute="top" constant="98.000000000000227" id="vfF-FB-OoE"/>
                             <constraint firstItem="bz3-vB-Uca" firstAttribute="baseline" secondItem="hDN-eN-Dzi" secondAttribute="baseline" id="vgi-N1-3cy"/>
+                            <constraint firstItem="Dg7-Hl-jTd" firstAttribute="bottom" secondItem="BIo-dN-aan" secondAttribute="bottom" id="x3I-SU-igz"/>
                             <constraint firstItem="1Bb-rL-kKM" firstAttribute="leading" secondItem="BIo-dN-aan" secondAttribute="leading" constant="20" id="xbI-iz-0sz"/>
                             <constraint firstItem="gmc-31-cXr" firstAttribute="baseline" secondItem="nL4-xF-Ugd" secondAttribute="baseline" id="xne-jK-0pq"/>
                             <constraint firstItem="iDq-fJ-nZV" firstAttribute="trailing" secondItem="nL4-xF-Ugd" secondAttribute="trailing" id="zXq-td-Rj6"/>
@@ -410,6 +418,7 @@
                         <outlet property="tuesdayTimesLabel" destination="vHF-0n-3gi" id="pkp-uF-szE"/>
                         <outlet property="vehicleTypeLabel" destination="jWu-hc-orC" id="c9R-lA-SS2"/>
                         <outlet property="wednesdayTimesLabel" destination="iDq-fJ-nZV" id="X6o-GI-pFZ"/>
+                        <segue destination="bB1-pn-RWv" kind="show" identifier="toTabController" id="YyM-vd-9j7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Nl-Hm-Ydt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -421,11 +430,11 @@
             <objects>
                 <viewController title="My Profile" id="WHC-Ca-5LB" customClass="InstructorProfileViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rml-kM-DCt" customClass="InstructorProfile">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewr-Ff-O0R">
-                                <rect key="frame" x="0.0" y="213" width="390" height="548"/>
+                                <rect key="frame" x="0.0" y="169" width="390" height="538"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5lc-YW-rFm">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1008"/>
@@ -715,7 +724,7 @@
             <objects>
                 <viewController id="nyg-jO-ECh" customClass="InstructorTimetableViewController" customModule="DriveWay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6gK-CO-d3R">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="90l-uq-viQ">

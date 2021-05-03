@@ -39,6 +39,7 @@ class InstructorMyStudentsDetailsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         print(studentID)
+        setUpObjects()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +49,7 @@ class InstructorMyStudentsDetailsViewController: UIViewController {
     
     func setUpObjects() {
         Utilities.styleTextViewNonInteractive(aboutMeTextView)
+        Utilities.styleButtonRed(dropStudentButton)
     }
     
     // MARK: - Button Functions
@@ -105,6 +107,7 @@ class InstructorMyStudentsDetailsViewController: UIViewController {
                 }
             }
         }
+        performSegue(withIdentifier: "toTabController", sender: nil)
     }
     
     
