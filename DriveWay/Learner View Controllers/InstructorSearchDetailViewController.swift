@@ -95,12 +95,7 @@ class InstructorSearchDetailViewController: UIViewController {
                 }
             }
         }
-        
-        
-        
-        
-        requestEnrolmentButton.isEnabled = false
-        requestEnrolmentButton.backgroundColor = .lightGray
+        performSegue(withIdentifier: "toMyInstructor", sender: nil)
         
         let alertController = UIAlertController(title: "Enrolled", message: "You have enrolled with this instructor", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default))
@@ -269,7 +264,6 @@ class InstructorSearchDetailViewController: UIViewController {
         }
     }
     
-    
     /*
     // MARK: - Navigation
 
@@ -278,6 +272,5 @@ class InstructorSearchDetailViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
-
+ */
 }

@@ -24,6 +24,7 @@ class LearnerNoInstructorViewController: UIViewController {
     
     func setUpObjects() {
         Utilities.styleButtonNeutral(searchForInstructorButton)
+        searchForInstructorButton.backgroundColor = .black
     }
 
     @IBAction func searchButtonPressed(_ sender: Any) {

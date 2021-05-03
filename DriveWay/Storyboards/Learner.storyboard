@@ -1001,11 +1001,12 @@
                         <outlet property="thursdayTimesLabel" destination="bLu-Bh-bIE" id="tgn-Qg-CWb"/>
                         <outlet property="tuesdayTimesLabel" destination="GHv-FJ-tbZ" id="0fO-4d-8CQ"/>
                         <outlet property="wednesdayTimesLabel" destination="fKy-U7-o2Y" id="rQt-eN-AXU"/>
+                        <segue destination="oky-Zf-RWN" kind="show" identifier="toMyInstructor" id="zuX-Bh-ABR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8l-EL-ecy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2898.4615384615386" y="344.43127962085305"/>
+            <point key="canvasLocation" x="2720" y="357"/>
         </scene>
         <!--Messages-->
         <scene sceneID="E6j-hZ-xfl">
@@ -1070,6 +1071,7 @@
         <scene sceneID="zxh-Uk-Rqk">
             <objects>
                 <tabBarController id="oky-Zf-RWN" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="e4D-cp-sy1"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xK7-2A-Rh5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -1170,6 +1172,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="My Instructor" image="car" catalog="system" selectedImage="car.fill" id="Al6-Rl-q9N"/>
+                    <navigationItem key="navigationItem" id="MMv-2o-Xeo"/>
                     <connections>
                         <outlet property="carInstructorContainerView" destination="C67-XP-HuD" id="RK4-F9-vYE"/>
                         <outlet property="motorcycleInstructorContainerView" destination="P3Q-91-AHi" id="1qM-VD-54w"/>
@@ -1839,6 +1842,9 @@
                                                 <state key="normal" title="Leave Instructor">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="leaveInstructorButtonPressed:" destination="r03-7s-KlX" eventType="touchUpInside" id="HW4-rm-Wev"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2050,6 +2056,7 @@
                         <outlet property="thursdayTimesLabel" destination="pZO-ba-gzR" id="XPf-F8-65S"/>
                         <outlet property="tuesdayTimesLabel" destination="0uX-zn-Opd" id="PhC-Vc-GwH"/>
                         <outlet property="wednesdayTimesLabel" destination="mP5-7q-6WT" id="CE6-Bk-7nc"/>
+                        <segue destination="oky-Zf-RWN" kind="show" identifier="toTabController" id="oxC-C6-xCl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R8S-dR-oGd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2074,6 +2081,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="LIS-ab-MJ2"/>
+        <segue reference="oxC-C6-xCl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="DriveWayLogo" width="680" height="324"/>

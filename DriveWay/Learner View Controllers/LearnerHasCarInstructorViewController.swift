@@ -62,6 +62,56 @@ class LearnerHasCarInstructorViewController: UIViewController {
         Utilities.styleButtonRed(leaveInstructorButton)
     }
     
+    // MARK: - Button Functions
+    
+    @IBAction func leaveInstructorButtonPressed(_ sender: Any) {
+        
+        let database = Firestore.firestore()
+        var collectionReference = database.collection("Students")
+        var query = collectionReference.whereField("userID", isEqualTo: userAccInfo!.uid)
+        
+        var dataToAdd = ["hasInstructor" : false,
+                                     "instructorID" : ""] as [String : Any]
+                    
+        Utilities.addDataToUserDocument(self.userAccInfo! , collection: "Students", dataToAdd: dataToAdd)
+        
+        collectionReference = database.collection("Instructors")
+        query = collectionReference.whereField("students", arrayContains: userAccInfo!.uid)
+        // Getting the documents that forfill the query
+        query.getDocuments() { (snapshot, err) in
+            // If there is an error
+            if err != nil {
+                // Print the error and a message
+                print("There was an error obtaining the documentID: \(err!)")
+            // Otherwise
+            } else {
+                // For every document in the snapshot
+                for document in snapshot!.documents {
+                    let instructorDocData = document.data()
+                    var students = instructorDocData["students"] as! [String]
+                    var index = Int()
+                    for i in 0...students.count - 1 {
+                        if students[i] == self.userAccInfo!.uid {
+                            index = i
+                        }
+                    }
+                    students.remove(at: index)
+                    dataToAdd = ["students" : students]
+                    // Add the data to the document
+                    let documentReference = collectionReference.document(document.documentID)
+                    documentReference.setData(dataToAdd, merge: true)
+                }
+            }
+        }
+        performSegue(withIdentifier: "toTabController", sender: nil)
+        
+        let alertController = UIAlertController(title: "Instructor Left", message: "You have left your instructor", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
     // MARK: - Data Retrieval
     func getInstructorInformation() {
         print("Getting insructor info car")
