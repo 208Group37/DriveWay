@@ -31,7 +31,6 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     @IBOutlet weak var nameLabel: UILabel!
     
     struct lesson: Equatable {
-        var duration: String
         var startTime: String
         var endTime: String
         var date: String
@@ -39,6 +38,9 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         var studentID: String
         var instructorID: String
         var notes: String
+        var dropoff: String
+        var pickup: String
+        var documentID: String
     }
     
     let userInfo = Auth.auth().currentUser
@@ -46,6 +48,9 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     var selectedLesson = 0
     var firstName = ""
     var instructorName = ""
+    var instructorID = ""
+    var studentID = ""
+    var instructorCost = ""
     
     var lessons = [lesson]()
     
@@ -81,6 +86,24 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         refreshTables()
     }
     
+    @IBAction func requestButton(_ sender: Any) {
+        let database = Firestore.firestore()
+        let collectionReference = database.collection("Instructors")
+        let query = collectionReference.whereField("userID", isEqualTo: lessons[selectedLesson].instructorID)
+        query.getDocuments { (snapshot, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                for document in snapshot!.documents {
+                    // All the information stored in the document about the user
+                    let userDocData = document.data()
+                    let lessonInfo = userDocData["lesson"] as! [String: Any]
+                    self.instructorCost = lessonInfo["price"]! as! String
+                }
+                self.performSegue(withIdentifier: "lessonRequestSegue", sender: nil)
+            }
+        }
+    }
     
     // MARK: - Additional Setup
     override func viewDidLoad() {
@@ -97,8 +120,11 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         lessonDetailTableView.bounces = false
         refreshTables()
         displayFirstName()
-        
         Utilities.styleButtonNeutral(requestLessonButton)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        lessons = [lesson]()
         let database = Firestore.firestore()
         let collectionReference = database.collection("Lessons")
         
@@ -111,8 +137,11 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
                     let userDocData = document.data()
                     let people = userDocData["people"] as? [String: String]
                     if (people!["studentID"] == self.userInfo!.uid) {
-                        let times = userDocData["time"] as? [String: String]
-                        let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String, status: userDocData["status"] as! String, studentID: people!["studentID"]!, instructorID: people!["instructorID"]!, notes: userDocData["notes"] as! String)
+                        let times = userDocData["time"] as? [String: Any]
+                        let location = userDocData["location"] as! [String: Any]
+                        let newLesson = lesson(startTime: times!["start"]! as! String, endTime: times!["end"]! as! String, date: userDocData["date"] as! String, status: userDocData["status"] as! String, studentID: people!["studentID"]!, instructorID: people!["instructorID"]!, notes: userDocData["notes"] as! String, dropoff: location["end"]! as! String, pickup: location["start"]! as! String, documentID: document.documentID)
+                        self.instructorID = people!["instructorID"]!
+                        self.studentID = people!["studentID"]!
                         self.lessons.append(newLesson)
                     }
                 }
@@ -128,10 +157,16 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
             detailViewController.time = " \(lessons[selectedLesson].startTime) - \(lessons[selectedLesson].endTime)"
             detailViewController.studentName = firstName
             detailViewController.instructorName = instructorName
-            detailViewController.pickup = ""
-            detailViewController.dropoff = ""
+            detailViewController.pickup = lessons[selectedLesson].pickup
+            detailViewController.dropoff = lessons[selectedLesson].dropoff
             detailViewController.notes = lessons[selectedLesson].notes
             detailViewController.status = lessons[selectedLesson].status
+            detailViewController.documentID = lessons[selectedLesson].documentID
+        }
+        if let lessonRequestViewController = segue.destination as? LearnerLessonRequestViewController {
+            lessonRequestViewController.instructorID = self.instructorID
+            lessonRequestViewController.studentID = self.studentID
+            lessonRequestViewController.instructorCost = Int(self.instructorCost)!
         }
     }
     
@@ -140,7 +175,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     func getNextWeekDates(_ week: Int) -> [String] {
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        formatter.dateFormat = "EEEE, d MMM yyyy"
         var dateWeek = [String]()
         
         for i in week*7...week*7+7 {
@@ -219,6 +254,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
         if (tableView == lessonTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "date", for: indexPath)
             cell.textLabel?.text = dates[indexPath.row]
+            cell.textLabel?.numberOfLines = 2
             cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 0)!
             return cell
         }
@@ -230,7 +266,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
                 for i in 0..<lessons.count {
                     if (lessons[i].date == dates[indexPath.row]) {
                         cell.textLabel?.text = "\(lessons[i].startTime) - \(lessons[i].endTime) (\(lessons[i].status))"
-                        cell.detailTextLabel?.text = "\(lessons[i].duration) hours"
+                        cell.detailTextLabel?.text = lessons[i].pickup
                         changeCellColour(cell: cell, lessonStatus: lessons[i].status)
                         cell.selectionStyle = UITableViewCell.SelectionStyle(rawValue: 1)!
                         return cell
