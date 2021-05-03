@@ -12,6 +12,7 @@ import FirebaseAuth
 class InstructorTimetableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Lesson Struct
+    //This will hold the data of each lesson to be displayed
     struct lesson: Equatable {
         var duration: String
         var startTime: String
@@ -25,13 +26,16 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
         var notes: String
     }
     
+    //Label outlets
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var timeTableView: UITableView!
     @IBOutlet weak var viewingDateLabel: UILabel!
     
+    //These are the actions for the buttons that change the day that the user is looking at. Each of them changes the date by one day (forward or backward), clears the array that holds the lessons for the day being viewed, then calls the function to retrieve the lessons for the day that has been changed to
     @IBAction func previousDayButton(_ sender: Any) {
         viewingDate = Calendar.current.date(byAdding: .day, value: -1, to: viewingDate)!
         let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "en_GB")
         formatter.dateStyle = .full
         viewingDateString = formatter.string(from: viewingDate)
         viewingDateLabel.text = viewingDateString
@@ -42,6 +46,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     @IBAction func nextDayButton(_ sender: Any) {
         viewingDate = Calendar.current.date(byAdding: .day, value: 1, to: viewingDate)!
         let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "en_GB")
         formatter.dateStyle = .full
         viewingDateString = formatter.string(from: viewingDate)
         viewingDateLabel.text = viewingDateString
@@ -54,25 +59,26 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     //Storing the date currently being viewed in both a date object and a string for convenience
     var viewingDate = Date()
     var viewingDateString = ""
+    //This array holds all the lessons for the day that is being viewed
     var lessonArray = [lesson]()
     var instructorName = ""
     var selectedLesson = -1
-    var selectedStudentName = ""
     
     // MARK: - Table set up
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lessonArray.count
     }
     
+    //Fill the table with the lessons for the day being viewed. It fills in the time and then the student's name for each lesson. To get the student's name it has to query the database.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! timetableViewCell
+        //get an individual lesson
         let lesson = lessonArray[indexPath.row]
-        //let pickupName = Utilities.convertGeoPointToPlaceName(geoPoint: lesson.startLocation)
-        
+        //make a query
         let database = Firestore.firestore()
         let collectionReference = database.collection("Students")
         let query = collectionReference.whereField("userID", isEqualTo: lesson.studentId)
-        
+        //get the name and put it into the label
         query.getDocuments { (snapshot, err) in
             if err != nil {
                 print("There was an error, \(err.debugDescription)")
@@ -80,30 +86,26 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                 for document in snapshot!.documents {
                     let nameData = document.data()["name"] as? [String: String]
                     let name = nameData!["first"]! + " " + nameData!["last"]!
-                    //cell.lessonDetailField.text = name + " at " + pickupName
+                    cell.lessonDetailField.text = name
                 }
             }
         }
-        
+        //put the time into the time label
         cell.timeField.text = lesson.startTime + " - " + lesson.endTime
         return cell
     }
-    
-    /*
-    func getLocationName(pointToGeocode: GeoPoint) -> String {
-        var locationName = ""
-        
-        return locationName
-    }*/
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //get today's date and format it into a string
         let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "en_GB")
         formatter.dateStyle = .full
         viewingDateString = formatter.string(from: Date())
+        //then display it
         viewingDateLabel.text = viewingDateString
         
+        //Make a query to get the instructors name
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
         let query = collectionReference.whereField("userID", isEqualTo: userInfo?.uid)
@@ -114,47 +116,75 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
             } else {
                 for document in snapshot!.documents {
                     let nameData = document.data()["name"] as? [String: String]
+                    //put the name into a greeting label
                     self.greetingLabel.text = "Hi, " + (nameData?["first"])!
                 }
             }
         }
+        //TEST LESSON - REMEMBER TO REMOVE
         let testStart = GeoPoint(latitude: 53.38988075156031, longitude: -2.96630859375)
         let testEnd = GeoPoint(latitude: 30.2, longitude: 12.1)
-        let newLesson = lesson(duration: "2", startTime: "18:00", endTime: "19:00", date: "Sunday, May 2, 2021", startLocation: testStart, endLocation: testEnd, instructorId: "lx8GcYCUE8M7QDSjRrJrBsorJwp2", studentId: "mHhitRpSyZUVuooVE4982IP11Z83", status: "Done", notes: "Some notes")
+        let newLesson = lesson(duration: "2", startTime: "18:00", endTime: "19:00", date: "Sunday, May 2 2021", startLocation: testStart, endLocation: testEnd, instructorId: "lx8GcYCUE8M7QDSjRrJrBsorJwp2", studentId: "mHhitRpSyZUVuooVE4982IP11Z83", status: "Done", notes: "Some notes")
         self.lessonArray.append(newLesson)
+        //Retrieve the lessons for the day
         retrieveLessons()
 
         // Do any additional setup after loading the view.
         
     }
+    
+    func parseTimeForComparison(timeString: String) -> Int {
+        let componentArray = timeString.components(separatedBy: ":")
+        var comparisonNumb = Int(componentArray[0]) ?? 0 * 60 + Int(componentArray[1])!
+        return comparisonNumb
+    }
+    
+    //This function uses an insertion sort to sort the array of lessons by time
+    func sortLessons(array: [lesson]) -> [lesson] {
+        var outputArray = array
+        
+        for item in 0..<array.count {
+            let key = parseTimeForComparison(timeString: outputArray[item].startTime)
+            var i = item-1
+            
+            while (i > 0 && parseTimeForComparison(timeString: outputArray[i].startTime) > key){
+                outputArray[i+1] = outputArray[i]
+                i = i-1
+            }
+            outputArray[i+1] = outputArray[item]
+        }
+        return outputArray
+    }
 
     // MARK: - Load lessons
     func retrieveLessons() {
+        //Make a query to get the lessons
         let database = Firestore.firestore()
         let collectionReference = database.collection("Lessons")
-        let query = collectionReference.whereField("date", isEqualTo: viewingDateString)//.whereField("instructorID", isEqualTo: userInfo!.uid as! String)
+        //They have to be on the day being viewed and for the instructor/user
+        let query = collectionReference.whereField("date", isEqualTo: viewingDateString) //.whereField("instructorID", isEqualTo: userInfo!.uid as! String)
         
         query.getDocuments { (snapshot, err) in
             if err != nil {
                 print("There was an error, \(err.debugDescription)")
             } else {
                 for document in snapshot!.documents {
+                    //put the details for each lesson into a lesson object
                     let userDocData = document.data()
+                    //some of the data has to be split into dictionaries because in the database they're mapped and so can't be accessed otherwise
                     let times = userDocData["time"] as? [String: String]
                     let locations = userDocData["location"] as? [String: GeoPoint]
                     let people = userDocData["people"] as? [String: String]
                     let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!, status: userDocData["status"] as! String, notes: userDocData["notes"] as! String)
+                    //store this object in the lesson array
                     self.lessonArray.append(newLesson)
                 }
-                //print(self.lessonArray)
-                let timeFormatter = DateFormatter()
-                timeFormatter.dateFormat = "hh:mm"
-                //self.lessonArray.sort(by: { (timeFormatter.date(from: $0.startTime))?.compare(timeFormatter.date(from: $1.startTime)!) == .orderedDescending })
-                //print(self.lessonArray)
+                print(self.lessonArray)
+                self.lessonArray = self.sortLessons(array: self.lessonArray)
+                print(self.lessonArray)
                 self.timeTableView.reloadData()
             }
         }
-        
     }
     
     /*
@@ -163,32 +193,18 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     */
     
+    //If a lesson in the table has been tapped on, it should take the user to a detail view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedLesson = indexPath.row
-        let database = Firestore.firestore()
-        let collectionReference = database.collection("Students")
-        let query = collectionReference.whereField("userID", isEqualTo: lessonArray[selectedLesson].studentId)
-        
-        query.getDocuments { (snapshot, err) in
-            if err != nil {
-                print("There was an error, \(err.debugDescription)")
-            } else {
-                for document in snapshot!.documents {
-                    let nameData = document.data()["name"] as? [String: String]
-                    self.selectedStudentName = nameData!["first"]! + " " + nameData!["last"]!
-                    
-                }
-            }
-        }
         performSegue(withIdentifier: "TimetableToLessonDetail", sender: nil)
     }
     
-
+    //Get the lesson data ready to send with the segue so the details can be filled in on the detail view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailViewController = segue.destination as? InstructorLessonDetailViewController {
             detailViewController.date = viewingDateString
             detailViewController.time = " \(lessonArray[selectedLesson].startTime) - \(lessonArray[selectedLesson].endTime)"
-            detailViewController.studentName = selectedStudentName
+            detailViewController.studentId = lessonArray[selectedLesson].studentId
             detailViewController.pickup = lessonArray[selectedLesson].startLocation
             detailViewController.dropoff = lessonArray[selectedLesson].endLocation
             detailViewController.notes = lessonArray[selectedLesson].notes
