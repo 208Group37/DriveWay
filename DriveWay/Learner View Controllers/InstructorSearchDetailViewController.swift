@@ -43,7 +43,9 @@ class InstructorSearchDetailViewController: UIViewController {
     
     @IBOutlet weak var requestEnrolmentButton: UIButton!
     
+    // Getting the currently signed in user
     let userAccInfo = Auth.auth().currentUser
+    // The instructor ID that was passed from the previous view via segue
     var instructorID = String()
     
     // MARK: - UI Setup
@@ -54,6 +56,7 @@ class InstructorSearchDetailViewController: UIViewController {
         setUpObjects()
     }
     
+    // Styling the view
     func setUpObjects() {
         getInstructorInformation()
         Utilities.styleTextViewNonInteractive(aboutMeTextView)
@@ -85,11 +88,14 @@ class InstructorSearchDetailViewController: UIViewController {
             } else {
                 // For every document in the snapshot
                 for document in snapshot!.documents {
+                    // get the instructor information
                     let instructorDocData = document.data()
+                    // Get their list of students
                     var students = instructorDocData["students"] as! [String]
+                    // adding the new student to the array
                     students.append(self.userAccInfo!.uid)
+                    // adding the array back to the database
                     dataToAdd = ["students" : students]
-                    // Add the data to the document
                     let documentReference = collectionReference.document(document.documentID)
                     documentReference.setData(dataToAdd, merge: true)
                 }
@@ -98,10 +104,14 @@ class InstructorSearchDetailViewController: UIViewController {
         
         
         
-        
+        // visual representation that the student has enrolled
         requestEnrolmentButton.isEnabled = false
         requestEnrolmentButton.backgroundColor = .lightGray
         
+        // sending the user back to their profile
+        performSegue(withIdentifier: "backToProfile", sender: nil)
+        
+        // creating and showing the alert that tells the user they have enrolled
         let alertController = UIAlertController(title: "Enrolled", message: "You have enrolled with this instructor", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default))
         self.present(alertController, animated: true,completion: nil)
@@ -110,15 +120,22 @@ class InstructorSearchDetailViewController: UIViewController {
     // MARK: - Data Retrieval
     func getInstructorInformation() {
         print("Getting insructor info car")
+        // creating a database reference
         let database = Firestore.firestore()
+        // creating a reference to the students collection
         var collectionReference = database.collection("Students")
+        // creating a query that is looking for a document where the userID field is the same as the current user's uid
         var query = collectionReference.whereField("userID", isEqualTo: userAccInfo!.uid)
         
+        // executing the query
         query.getDocuments { (snapshot, err) in
+            // if error print it (for debugging)
             if err != nil {
                 print(err.debugDescription)
             } else {
+                // for every document in the snapshot
                 for document in snapshot!.documents {
+                    // get all the users data from the document
                     let userDocData = document.data()
                     // Getting the users address from the database
                     let privateInfo = userDocData["privateInfo"] as! [String : Any]
@@ -130,7 +147,7 @@ class InstructorSearchDetailViewController: UIViewController {
                     // All the information stored in the document about the instructor
                     collectionReference = database.collection("Instructors")
                     query = collectionReference.whereField("userID", isEqualTo: self.instructorID)
-                    
+                    // executing the next query
                     query.getDocuments { snapshot, err in
                         if err != nil {
                             print(err.debugDescription)
@@ -195,14 +212,18 @@ class InstructorSearchDetailViewController: UIViewController {
                                     self.crashCourseLabel.text = "No"
                                 }
                                 
+                                // getting the instuctor ID as a string
                                 let instructorAddress = "\(homeAddress["line1"]!), \(homeAddress["line2"]!), \(homeAddress["city"]!)"
                                 
+                                // geocoders used to get the coordinates from the address
                                 let geocoder1 = CLGeocoder()
                                 let geocoder2 = CLGeocoder()
                                 
+                                // the two locations as cl location objects
                                 var userLocation = CLLocation()
                                 var instructorLocation = CLLocation()
                                 
+                                // this is a method that gets the coordinates of a place based on the street number and location
                                 geocoder1.geocodeAddressString(userAddress) { placemark, err in
                                     if err != nil {
                                         print("There was an error, \(err.debugDescription)")
@@ -216,11 +237,13 @@ class InstructorSearchDetailViewController: UIViewController {
                                                     for place in placemark! {
                                                         instructorLocation = place.location!
                                                         print(instructorLocation)
+                                                        // get the distance in meters
                                                         let CLdistance = userLocation.distance(from: instructorLocation)
                                                         
-                                                        
+                                                        // convert to miles and round up
                                                         let distance = Float(CLdistance/1600).rounded(.up)
                                                         
+                                                        // setting the label
                                                         self.distanceLabel.text =  String(Int(distance)) + " Miles"
                                                     }
                                                 }
@@ -228,8 +251,10 @@ class InstructorSearchDetailViewController: UIViewController {
                                         }
                                     }
                                 }
+                                // setting the lesson count to zero
                                 self.lessonCountLabel.text = "0"
                                 
+                                // setting the availability labels
                                 let availability = instructorDocData["availability"] as! [String : [String]]
                                 for day in availability {
                                     var labelText = String()
@@ -259,6 +284,7 @@ class InstructorSearchDetailViewController: UIViewController {
                                     }
                                 }
                                 
+                                // getting and setting the about me text field
                                 let instructorAboutMeText = instructorDocData["aboutMe"] as! String
                                 self.aboutMeTextView.text = instructorAboutMeText
                             }
