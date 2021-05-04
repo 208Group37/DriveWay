@@ -22,6 +22,8 @@ class LearnerLessonRequestViewController: UIViewController, UIPickerViewDelegate
     var day = ""
     var locations: [String] = []
     var instructorCost: Int = 0
+    
+    let userID = Auth.auth().currentUser!.uid
         
     // MARK: - Outlets
     @IBOutlet weak var dateField: UITextField!
@@ -53,7 +55,7 @@ class LearnerLessonRequestViewController: UIViewController, UIPickerViewDelegate
             "notes" : "",
             "people" : [
                 "instructorID" : instructorID,
-                "studentID" : studentID,
+                "studentID" : userID,
             ],
             "status" : "Pending",
             "time" : [
@@ -125,7 +127,7 @@ class LearnerLessonRequestViewController: UIViewController, UIPickerViewDelegate
         var allAddresses: [String] = []
         let database = Firestore.firestore()
         let collectionReference = database.collection("Students")
-        let query = collectionReference.whereField("userID", isEqualTo: studentID)
+        let query = collectionReference.whereField("userID", isEqualTo: userID)
         query.getDocuments { (snapshot, err) in
             if err != nil {
                 print(err.debugDescription)

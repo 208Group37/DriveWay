@@ -89,7 +89,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
     @IBAction func requestButton(_ sender: Any) {
         let database = Firestore.firestore()
         let collectionReference = database.collection("Instructors")
-        let query = collectionReference.whereField("userID", isEqualTo: lessons[selectedLesson].instructorID)
+        let query = collectionReference.whereField("userID", isEqualTo: instructorID)
         query.getDocuments { (snapshot, err) in
             if err != nil {
                 print(err.debugDescription)
@@ -217,6 +217,7 @@ class LearnerDisplayCalendarViewController: UIViewController, UITableViewDelegat
                     let userDocData = document.data()
                     let names = userDocData["name"] as? [String: String]
                     firstName = names!["first"]!
+                    self.instructorID = userDocData["instructorID"] as! String
                     self.nameLabel?.text = "Hi, \(firstName)"
                     self.firstName = firstName
                 }

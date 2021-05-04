@@ -14,7 +14,6 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
     // MARK: - Lesson Struct
     //This will hold the data of each lesson to be displayed
     struct lesson: Equatable {
-        var duration: String
         var startTime: String
         var endTime: String
         var date: String
@@ -183,7 +182,7 @@ class InstructorTimetableViewController: UIViewController, UITableViewDelegate, 
                     let times = userDocData["time"] as? [String: String]
                     let locations = userDocData["location"] as? [String: String]
                     let people = userDocData["people"] as? [String: String]
-                    let newLesson = lesson(duration: times!["duration"]!, startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!, status: userDocData["status"] as! String, notes: userDocData["notes"] as! String, lessonId: document.documentID)
+                    let newLesson = lesson(startTime: times!["start"]!, endTime: times!["end"]!, date: userDocData["date"] as! String,startLocation: locations!["start"]!, endLocation: locations!["end"]!, instructorId: people!["instructorID"]!, studentId: people!["studentID"]!, status: userDocData["status"] as! String, notes: userDocData["notes"] as! String, lessonId: document.documentID)
                     //store this object in the lesson array
                     self.lessonArray.append(newLesson)
                 }

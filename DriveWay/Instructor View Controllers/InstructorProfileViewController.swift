@@ -39,8 +39,11 @@ class InstructorProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.styleTextViewNonInteractive(aboutMeBox)
-        getAndFillInfo()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getAndFillInfo()
     }
     
     func convertArrayToString(array : [String]) -> String {
