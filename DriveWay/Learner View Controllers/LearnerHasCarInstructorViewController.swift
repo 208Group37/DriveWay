@@ -58,7 +58,6 @@ class LearnerHasCarInstructorViewController: UIViewController {
         getInstructorInformation()
         Utilities.styleTextViewNonInteractive(aboutMeTextView)
         Utilities.styleTextViewNonInteractive(reviewBodyTextView)
-        Utilities.styleButtonGreen(requestLessonButton)
         Utilities.styleButtonRed(leaveInstructorButton)
     }
     
